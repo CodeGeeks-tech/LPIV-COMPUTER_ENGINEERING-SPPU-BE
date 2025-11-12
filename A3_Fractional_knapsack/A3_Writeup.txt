@@ -1,0 +1,100 @@
+A(3) Write a program to solve a fractional Knapsack problem using a greedy method
+
+THEORY
+The Fractional Knapsack problem is an optimization problem where each item has a value and weight, and the goal is to maximize total value in a knapsack with limited capacity. Unlike the 0/1 Knapsack, here we are allowed to take fractions of items. The greedy strategy sorts items based on their value-to-weight ratio and selects the item that provides the highest gain per unit weight. This approach guarantees an optimal solution because at every step it picks the most value-efficient option.
+
+ALGORITHM
+
+Fractional Knapsack Algorithm (Greedy Strategy)
+
+Start
+
+Input number of items, along with their weights and values
+
+Input knapsack capacity
+
+Compute value/weight ratio for all items
+
+Sort items in descending order of ratio
+
+For each item in sorted order:
+  • If full item fits, add entire value and reduce capacity
+  • Else, take fractional part equal to remaining capacity
+  • Break if capacity becomes zero
+
+Display the maximum value obtained
+
+End
+
+Time Complexity: O(n log n) due to sorting
+Space Complexity: O(n)
+
+
+              +----------------+
+              |     Start      |
+              +--------+-------+
+                       |
+                       v
+         +-------------+----------------+
+         |  Input n items (w, v pairs)  |
+         +-------------+----------------+
+                       |
+                       v
+          +------------+----------------+
+          | Input knapsack capacity C   |
+          +------------+----------------+
+                       |
+                       v
+        +--------------+---------------------+
+        | Compute ratio = value / weight for |
+        |            each item               |
+        +--------------+---------------------+
+                       |
+                       v
+        +-------------------------------+
+        | Sort items by ratio (high→low)|
+        +-------------------------------+
+                       |
+                       v
+        +-------------------------------+
+        | For each item in sorted list  |
+        +---------------+---------------+
+                        |
+                        v
+             +----------+-----------+
+             | weight <= capacity ? |
+             +-----+------------+---+
+                   |Yes         |No
+                   v            v
+     +-------------+--+     +-------------------------------+
+     | Take full item |     | Take fraction: value * (C/w)  |
+     +-------------+--+     +-------------------------------+
+                   |              |
+                   v              v
+         +---------+--------+  +--+------------------------+
+         | C = C - weight   |  | C = 0 (knapsack full)     |
+         +---------+--------+  +----------------------------+
+                   |
+                   v
+         +---------+--------+
+         | Accumulate value |
+         +---------+--------+
+                   |
+                   v
+            (Loop continues)
+                   |
+                   v
+           +-------+--------+
+           |   Print max    |
+           |   value stored |
+           +-------+--------+
+                   |
+                   v
+                +--+--+
+                | End |
+                +-----+
+
+
+
+CONCLUSION
+The Fractional Knapsack problem demonstrates the power of the greedy strategy: by always choosing the item with the highest value-to-weight ratio, we obtain the most efficient and optimal solution. Since fractions of items are allowed, the greedy choice never leads to a suboptimal outcome. This makes the fractional knapsack problem one of the classic examples where the greedy method guarantees optimality with excellent time efficiency.

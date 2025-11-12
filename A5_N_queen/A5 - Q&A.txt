@@ -1,0 +1,141 @@
+1. What is the N-Queens problem?
+
+Answer:
+The N-Queens problem asks to place N queens on an N × N chessboard such that no two queens attack each other.
+
+2. What conditions must be satisfied for a valid N-Queens placement?
+
+Answer:
+No two queens can share:
+
+The same row
+
+The same column
+
+The same diagonal
+
+3. What algorithmic technique is used to solve N-Queens in your code?
+
+Answer:
+Backtracking, a depth-first search technique that builds solutions step by step and undoes invalid decisions.
+
+4. What is the role of the is_safe() function?
+
+Answer:
+It checks whether placing a queen at a specific board position is valid (no conflicts in column or diagonals).
+
+5. Why do we not check the rows in is_safe()?
+
+Answer:
+Because queens are placed row by row, so earlier rows already contain only one queen each.
+
+6. What does backtracking mean in this program?
+
+Answer:
+After placing a queen, if it leads to no solution, the queen is removed (board[row][col] = "0") and the program tries the next column.
+
+7. What does the condition if row == n: represent?
+
+Answer:
+It means all rows have been successfully filled with queens → a full valid solution is found.
+
+8. Why is recursion used in N-Queens?
+
+Answer:
+Because the solution is built row-by-row, and each decision depends on previous placements.
+
+9. What is the time complexity of the N-Queens backtracking solution?
+
+Answer:
+Worst case: O(N!), since each row tries all columns.
+
+10. How many solutions exist for N = 1, 2, 3?
+
+Answer:
+
+N = 1 → 1 solution
+
+N = 2 → No solution
+
+N = 3 → No solution
+
+11. What does print_board() do?
+
+Answer:
+It prints the current configuration of the board when a valid solution is found.
+
+12. Why is "Q" used to represent a queen and "0" for empty?
+
+Answer:
+For simple, clear visualization. "0" indicates no queen placed.
+
+13. What are the three checks in is_safe()?
+
+Answer:
+
+Same column
+
+Upper-left diagonal
+
+Upper-right diagonal
+
+14. Why don't we check lower diagonals?
+
+Answer:
+Because queens are only placed on lower rows later, so those diagonals are empty.
+
+15. What does res = solve_n_queens(...) or res mean?
+
+Answer:
+It allows the function to print multiple solutions instead of stopping at the first one.
+
+16. What happens if no valid configuration exists for the given N?
+
+Answer:
+The message "No solution exists." is printed.
+
+17. How is the chessboard initialized?
+
+Answer:
+Using a 2D list:
+board = [["0"] * n for _ in range(n)]
+
+18. Why is backtracking suitable for the N-Queens problem?
+
+Answer:
+Because it explores all placement possibilities systematically, undoing invalid moves.
+
+19. What happens if we remove backtracking (board[row][col] = "0")?
+
+Answer:
+The board would remain incorrect and multiple solutions would not be found.
+
+20. For N = 4, how many solutions exist?
+
+Answer:
+There are 2 valid solutions — both printed by your code.
+
+21. Why do we call solve_n_queens(board, 0, n) starting at row 0?
+
+Answer:
+The first queen is always placed in row 0, and the function proceeds row by row.
+
+22. What is the meaning of the return True inside solve_n_queens()?
+
+Answer:
+It signals that a full valid configuration has been found.
+
+23. Could we use greedy strategy instead of backtracking?
+
+Answer:
+No. Greedy choices do not guarantee optimal or correct placements because future rows depend on earlier ones.
+
+24. How would you detect only one solution instead of all?
+
+Answer:
+Return immediately after finding the first solution (remove logical OR with res).
+
+25. Why does the program print a blank line between solutions?
+
+Answer:
+The print() inside print_board() creates spacing to separate each solution for readability.

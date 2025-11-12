@@ -1,0 +1,89 @@
+A(4) Write a program to solve a 0-1 Knapsack problem using dynamic programming or branch and bound strategy.
+
+THEORY
+The 0–1 Knapsack problem is a classic optimization problem where each item must be either taken completely or left out (no fractions allowed). Each item has a value and weight, and the goal is to maximize the total value without exceeding the knapsack’s capacity. It is commonly solved using Dynamic Programming, which builds a table of optimal solutions for subproblems, or Branch and Bound, which prunes unpromising branches of the solution space. The provided program uses a recursive approach similar to dynamic programming, solving the subproblems by exploring both possibilities—taking or not taking an item.
+
+ALGORITHM
+
+0–1 Knapsack Algorithm (Recursive / DP Approach)
+
+Start
+
+Input number of items, and their values and weights
+
+Input maximum capacity of the knapsack
+
+Define a recursive function:
+  • If no items left or capacity = 0 → return 0
+  • If current item weight > capacity → skip item
+  • Else: choose the maximum of:
+    (1) value of item + solution for remaining capacity and items
+    (2) solution without including the item
+
+Call the recursive function with full capacity and all items
+
+Display the maximum value obtained
+
+End
+
+Time Complexity: O(2ⁿ) for plain recursion
+(With DP memoization → O(nW))
+Space Complexity: O(n) (recursion stack)
+(With DP table → O(nW))
+
+
+                 +----------------+
+                 |     Start      |
+                 +--------+-------+
+                          |
+                          v
+         +----------------+----------------+
+         | Input n, values, weights, W     |
+         +----------------+----------------+
+                          |
+                          v
+          +---------------+----------------+
+          | Call Knapsack(W, n-1)          |
+          +---------------+----------------+
+                          |
+                          v
+        +--------------------+--------------------+
+        | Knapsack(W, i):                         |
+        +--------------------+--------------------+
+                          |
+                          v
+        +-----------------+-----------------------+
+        | Is i < 0 or W <= 0 ?                   |
+        +-----------+-------------+--------------+
+                    |Yes          |No
+                    v             v
+        +-----------+--+   +------+-------------------------+
+        | Return 0     |   | Is wt[i] > W ?                 |
+        +--------------+   +-------------+------------------+
+                                            |Yes    |No
+                                            v       v
+                                +-----------+--+  +--------------------------+
+                                | Return Knapsack |  | Compute two cases:     |
+                                | (W, i-1)        |  | 1) Include item        |
+                                +-----------------+  | 2) Exclude item        |
+                                                     +------------+-----------+
+                                                                  |
+                                                                  v
+                                                +----------------+------------------+
+                                                | Return max(include, exclude)     |
+                                                +----------------------------------+
+                          |
+                          v
+             +------------+--------------+
+             | Print maximum value       |
+             +------------+--------------+
+                          |
+                          v
+                       +--+--+
+                       | End |
+                       +-----+
+
+
+CONCLUSION
+The 0–1 Knapsack problem is an excellent example of optimization using Dynamic Programming. The recursive method explores all combinations of including or excluding items, ensuring that the optimal value is found. Although plain recursion has exponential complexity, the same logic can be optimized using DP or Branch & Bound, making it efficient for larger inputs. The problem highlights the systematic evaluation of subproblems to reach an optimal solution.
+

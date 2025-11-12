@@ -1,0 +1,140 @@
+✅ CODE EXPLANATION – Huffman Encoding using Greedy Strategy
+
+This program implements Huffman Encoding, a lossless data compression technique.
+The algorithm assigns shorter binary codes to high-frequency characters and longer codes to low-frequency characters.
+It uses a Greedy approach and a Min-Heap (priority queue) to build the optimal Huffman Tree.
+
+🔹 1. Node Class – Representing Each Huffman Tree Node
+class Node:
+    def __init__(self, char, freq):
+        self.char = char
+        self.freq = freq
+        self.left = None
+        self.right = None
+
+✔ Explanation:
+
+Each character in the input string becomes a leaf node.
+
+Internal (combined) nodes have:
+
+char = None
+
+freq = sum of child frequencies
+
+Every node has two children → left (0) and right (1).
+
+🔹 2. Overriding the Less-Than Operator
+def __lt__(self, other):
+    return self.freq < other.freq
+
+✔ Why is this needed?
+
+Priority queues (Min-Heap) must compare two nodes.
+
+This tells Python to compare nodes based on frequency.
+
+Required for heapq to work.
+
+🔹 3. Printing Huffman Codes Using Tree Traversal
+def print_codes(node, code=""):
+    if node is None:
+        return
+    if node.char is not None:
+        print(f"{node.char}: {code}")
+    print_codes(node.left, code + "0")
+    print_codes(node.right, code + "1")
+
+✔ Explanation:
+
+Performs preorder traversal of the Huffman tree.
+
+Builds binary codes:
+
+Left child → append "0"
+
+Right child → append "1"
+
+When a leaf node (character) is reached, the code generated so far is printed.
+
+🔹 4. Huffman Encoding Function
+def huffman_encoding(char_freq):
+    heap = [Node(char, freq) for char, freq in char_freq.items()]
+    heapq.heapify(heap)
+
+✔ Step 1: Build Min-Heap
+
+Converts each character → Node
+
+Heap ensures smallest frequency nodes are removed first.
+
+✔ Step 2: Build Huffman Tree
+while len(heap) > 1:
+    left = heapq.heappop(heap)
+    right = heapq.heappop(heap)
+    
+    new_node = Node(None, left.freq + right.freq)
+    new_node.left = left
+    new_node.right = right
+
+    heapq.heappush(heap, new_node)
+
+
+Explanation:
+
+Remove 2 smallest frequency nodes (left, right)
+
+Create a parent node with frequency = sum of both
+
+Assign children:
+
+left → 0
+
+right → 1
+
+Push back into heap
+
+Continue until only one root node remains → Huffman Tree complete.
+
+✔ Step 3: Print Codes
+print("Character | Huffman Code")
+print("------------------------")
+print_codes(heap[0])
+
+
+Tree root is stored at heap[0]
+
+Calls recursive print_codes() to generate codes
+
+🔹 5. Main Program – Input & Frequency Count
+text = input("Enter text to encode: ")
+freq = {}
+for ch in text:
+    freq[ch] = freq.get(ch, 0) + 1
+
+✔ Explanation:
+
+Takes user input
+
+Builds a dictionary storing frequency of each character
+
+✔ Display Frequencies
+for char, f in freq.items():
+    print(f"{char}: {f}")
+
+✔ Start Huffman Encoding
+huffman_encoding(freq)
+
+✔ Overall Flow Summary
+
+Count frequency of each character
+
+Insert nodes into a min-heap
+
+Repeatedly extract the two smallest nodes
+
+Create a parent node and push back into heap
+
+Final node becomes root
+
+Traverse the tree to generate binary Huffman codes

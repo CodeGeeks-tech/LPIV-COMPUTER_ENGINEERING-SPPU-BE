@@ -1,0 +1,96 @@
+A(2) Write a program to implement Huffman Encoding using a greedy strategy.
+
+Huffman Encoding is an optimal prefix coding technique used for lossless data compression. It assigns shorter binary codes to characters occurring more frequently and longer codes to less frequent characters. The algorithm follows a greedy strategy by repeatedly selecting two nodes with the smallest frequencies to build the Huffman Tree. This ensures minimal weighted path cost, making Huffman Encoding one of the most efficient compression algorithms. The result is a variable-length prefix-free binary code for each character in the input.
+
+ALGORITHM
+
+Huffman Encoding Algorithm (Greedy Approach)
+
+Start
+
+Calculate frequency of each character in the input text
+
+Create a min-heap (priority queue) where each node stores a character and its frequency
+
+While heap size > 1:
+  • Remove two nodes with minimum frequency
+  • Create a new internal node with frequency = sum of both nodes
+  • Set the two nodes as left and right children
+  • Insert the new node back into the heap
+
+The remaining node in the heap is the root of the Huffman Tree
+
+Traverse the tree:
+  • Assign '0' to left edges and '1' to right edges
+  • Collect binary codes for all characters
+
+Print the Huffman Codes
+
+End
+
+Time Complexity: O(n log n)
+Space Complexity: O(n)
+
+
+            +----------------+
+            |     Start      |
+            +-------+--------+
+                    |
+                    v
+        +-----------+----------------+
+        | Count frequency of chars   |
+        +-----------+----------------+
+                    |
+                    v
+        +-----------+----------------+
+        | Build min-heap of nodes    |
+        +-----------+----------------+
+                    |
+                    v
+        +------------------------------+
+        | While heap size > 1          |
+        +---------------+--------------+
+                        |
+                        v
+         +--------------+--------------------+
+         | Extract two nodes with min freq   |
+         +--------------+--------------------+
+                        |
+                        v
+        +---------------+--------------------+
+        | Create new node (freq=sum of both) |
+        +---------------+--------------------+
+                        |
+                        v
+        +---------------+--------------------+
+        | Insert new node back in heap       |
+        +---------------+--------------------+
+                        |
+                        v
+             (Loop back to condition)
+                        |
+                        v
+        +---------------+--------------------+
+        | Remaining node = Huffman Root      |
+        +---------------+--------------------+
+                        |
+                        v
+        +-------------------------------+
+        | Traverse tree to assign codes |
+        +-------------------------------+
+                        |
+                        v
+              +---------+--------+
+              | Print Huffman   |
+              |      Codes      |
+              +---------+--------+
+                        |
+                        v
+                   +----+----+
+                   |   End   |
+                   +---------+
+
+
+
+CONCLUSION
+Huffman Encoding efficiently compresses data by assigning optimal variable-length codes to characters based on frequency. Using a greedy strategy ensures that at each step the smallest available nodes are combined, minimizing the overall weighted path length. As a result, Huffman Encoding produces compression close to theoretical entropy limits, making it widely used in file compression formats such as ZIP, GZIP, and multimedia standards.
