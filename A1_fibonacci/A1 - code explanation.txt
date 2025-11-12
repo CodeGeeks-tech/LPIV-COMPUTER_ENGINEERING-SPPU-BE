@@ -1,0 +1,106 @@
+✅ CODE EXPLANATION – Fibonacci (Recursive & Non-Recursive)
+
+This program computes and displays the Fibonacci series using two different methods:
+
+Recursive method
+
+Non-recursive (iterative) method
+
+The program also allows the user to specify how many terms of the Fibonacci sequence they want.
+
+🔹 1. recursive_fibonacci(n) – Recursive Approach
+def recursive_fibonacci(n): 
+    if n <= 1: 
+        return n 
+    else: 
+        return recursive_fibonacci(n-1) + recursive_fibonacci(n-2)
+
+✔ Explanation:
+
+The Fibonacci sequence is defined as:
+F(0) = 0, F(1) = 1
+F(n) = F(n-1) + F(n-2) for n > 1
+
+This function directly implements that mathematical definition using recursion.
+
+Base Case:
+If n is 0 or 1 → return n
+
+Recursive Case:
+Otherwise, call the function again for previous two values and return their sum.
+
+✔ Characteristics:
+
+Easy to understand but slow, because many values are recomputed repeatedly.
+
+Time Complexity: O(2ⁿ)
+
+Space Complexity: O(n) (due to recursion stack)
+
+🔹 2. non_recursive_fibonacci(n) – Iterative Approach
+def non_recursive_fibonacci(n): 
+    first = 0 
+    second = 1 
+    print(first)
+    if n > 1:
+        print(second)
+    for i in range(2, n):
+        third = first + second 
+        print(third)
+        first, second = second, third 
+
+✔ Explanation:
+
+Starts by manually printing the first two Fibonacci numbers: 0 and 1.
+
+If the user wants more than one term, it prints both.
+
+Then it enters a loop from 2 up to n:
+
+Computes the next Fibonacci number as:
+third = first + second
+
+Prints this number
+
+Updates variables for the next iteration:
+first ← second
+second ← third
+
+✔ Characteristics:
+
+Much faster than recursion.
+
+Time Complexity: O(n)
+
+Space Complexity: O(1) (only three variables used)
+
+🔹 3. Main Program
+if __name__ == "__main__": 
+    n = int(input("Enter how many terms you want: "))
+
+
+Reads the number of Fibonacci terms from the user.
+
+    print("\nFibonacci Series using Recursive Method:")
+    for i in range(n): 
+        print(recursive_fibonacci(i))
+
+
+Uses recursion to compute each term from 0 to n−1
+
+Prints each value individually
+
+    print("\nFibonacci Series using Non-Recursive (Iterative) Method:")
+    non_recursive_fibonacci(n)
+
+
+Calls the iterative function to print the same sequence.
+
+✅ Final Summary
+Method	Approach	Time Complexity	Space Complexity	Speed
+Recursive	function calls itself (F(n−1)+F(n−2))	O(2ⁿ)	O(n)	Slow
+Non-Recursive	loop-based, uses variables	O(n)	O(1)	Fast
+
+The recursive method is simple but inefficient.
+
+The iterative method is efficient and practical for large n.
