@@ -1,0 +1,35 @@
+Introduction
+The N-Queens problem involves placing N queens on an N×N chessboard such that no two queens threaten each other. This means no two queens can share the same row, column, or diagonal. It is a classic problem in artificial intelligence and algorithms because it demonstrates the use of backtracking to explore all possible configurations of the board efficiently. This experiment designs an N-Queens matrix with the first queen placed and uses a recursive backtracking strategy to place the remaining queens and generate all valid final solutions.
+
+Problem Definition
+The challenge is to systematically explore potential positions for queens and ensure that each newly placed queen does not conflict with existing queens. The constraints include avoiding row attacks, column attacks, and diagonal attacks. Since each row must contain exactly one queen for efficiency, the solution places queens row by row, checking the safety of each column within that row.
+
+Backtracking Approach
+Backtracking is a depth-first search technique where the algorithm tries placing a queen in a valid position, proceeds recursively, and backtracks if a conflict arises. When a queen cannot be safely placed in any column of a row, the algorithm returns (“backtracks”) to the previous row and tries a different column position. This systematic exploration ensures that all possible board configurations are checked without unnecessary repetition.
+
+Safety Check
+The is_safe() function checks whether placing a queen in a given row and column is valid. It verifies three constraints: no other queen in the same column, no queen on the upper-left diagonal, and no queen on the upper-right diagonal. Because queens are placed row by row from the top, only the upper rows need to be checked. This optimizes performance and avoids checking the entire board.
+
+Recursive Placement Function
+The solve_n_queens() function is responsible for placing queens recursively. It tries placing a queen in every column of the current row. If a safe position is found, the queen is placed, and the function recursively attempts to place the next queen in the next row. If it reaches the last row successfully, a complete valid solution is printed. If not, it removes the queen (backtracks) and tries another column.
+
+Matrix Representation
+The chessboard is represented as a 2D list (matrix) where “Q” indicates a queen and “0” indicates an empty cell. This matrix is updated dynamically when queens are placed or removed during backtracking. The print_board() function is used to display each successful arrangement of queens in a readable matrix format.
+
+Multiple Solutions
+For certain values of N, such as N=4 or N=8, multiple valid solutions exist. The algorithm is designed to find all such solutions and print them one by one. For example, N=4 has exactly two valid solutions, both of which are displayed by the program. This helps demonstrate how backtracking explores and outputs all possible results.
+
+Time Complexity
+The worst-case time complexity of the N-Queens problem is O(N!), because for each row the algorithm attempts N column positions and explores possible arrangements recursively. However, pruning from the safety checks significantly reduces the actual search space. Even though the complexity is high, backtracking remains the most efficient general solution.
+
+Space Complexity
+The space complexity is O(N²) when considering the full matrix storage. However, recursive backtracking consumes additional stack space proportional to N levels of recursion. Efficient memory handling ensures that only one matrix is maintained throughout the process.
+
+Importance of Backtracking
+Backtracking provides a clean and structured solution to constraint-satisfaction problems like N-Queens. It avoids brute-force enumeration of all possible board configurations, instead focusing only on promising placements. This makes the algorithm both practical and elegant in exploring complex solution spaces.
+
+Applications
+The N-Queens problem is foundational in learning constraint satisfaction algorithms, recursion, and backtracking. It also forms the basis for solving more complex problems in chess automation, puzzle solving, scheduling, and artificial intelligence search tasks.
+
+Conclusion
+This experiment successfully implements the N-Queens problem using backtracking and demonstrates how the algorithm places queens row by row while checking for conflicts. By placing the first queen and recursively exploring valid positions for the remaining queens, the program efficiently generates all valid solutions. This experiment highlights the power and simplicity of backtracking for solving complex combinatorial problems.

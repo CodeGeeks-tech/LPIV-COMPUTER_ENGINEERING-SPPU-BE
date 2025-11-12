@@ -1,0 +1,29 @@
+Introduction
+The Fractional Knapsack problem is a classic optimization problem that aims to maximize the total value of items placed into a knapsack with a fixed capacity. Unlike the 0/1 Knapsack problem, items can be broken into smaller pieces, allowing the algorithm to take fractions of items instead of whole items. This flexibility makes the problem solvable efficiently using a Greedy strategy, which chooses items based on their maximum value-to-weight ratio.
+
+Problem Definition
+Given n items, each with a value and weight, the goal is to select items such that the total weight does not exceed the knapsack capacity W. Because items can be divided, we can take any fraction of an item to utilize the remaining space optimally. The objective is to maximize total value by picking the most profitable portions of items first.
+
+Greedy Strategy
+The Greedy method sorts all items based on their value-to-weight ratio (value/weight) in descending order. By picking items with the highest ratio first, the algorithm ensures the knapsack is filled with the most valuable items per unit weight. This strategy guarantees the optimal solution for the Fractional Knapsack problem because local optimal decisions lead to global optimality.
+
+Sorting Items
+Items are paired by weight and value, and then sorted according to value/weight ratio. Items with the highest ratios are processed first. Sorting is crucial in the greedy approach because it defines the order in which items are considered. The time complexity for sorting is O(n log n).
+
+Selecting Full Items
+If the current item’s weight is less than or equal to the remaining capacity of the knapsack, the entire item is added. Both the total value and the remaining capacity are updated. This continues until an item is too heavy to fit completely.
+
+Selecting Fractional Items
+If the remaining capacity is smaller than the item’s weight, a fraction of the item is taken. This fraction is calculated as (remaining capacity / item weight), and the corresponding value added is value × fraction. After this, the knapsack becomes full, and the process stops. This step ensures maximum utilization of remaining space.
+
+Complexity Analysis
+The overall time complexity is dominated by sorting items based on value-to-weight ratio, which is O(n log n). The selection process then runs in linear time O(n). Therefore, the total time complexity is O(n log n). Space complexity is O(1) excluding input storage, as the algorithm uses only a few variables for capacity and result tracking.
+
+Greedy Choice Property
+Fractional Knapsack satisfies the greedy choice property, meaning the best local choice—choosing the next item with highest value/weight ratio—always leads to the optimal global solution. This is why no backtracking or dynamic programming is required for this version of the knapsack problem.
+
+Applications
+Fractional Knapsack has real-world applications in resource allocation, investment decisions, cargo loading, portfolio management, and optimization systems where items can be divided. Its efficiency and flexibility make it suitable for continuous optimization problems.
+
+Conclusion
+This experiment successfully demonstrates how the Fractional Knapsack problem can be solved using a simple and efficient greedy method. By selecting items based on the highest value-to-weight ratio, the algorithm ensures an optimal solution in minimal time. The ability to take fractional items differentiates this from other variants and makes it a perfect example of greedy algorithms producing globally optimal results.

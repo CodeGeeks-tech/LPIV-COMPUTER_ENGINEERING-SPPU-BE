@@ -1,0 +1,156 @@
+✅ CODE EXPLANATION – N-Queens Problem Using Backtracking
+
+The N-Queens problem asks you to place N queens on an N×N chessboard so that no two queens attack each other.
+A queen can attack horizontally, vertically, and diagonally—so each placement must be carefully checked.
+
+This program uses backtracking, a depth-first search strategy that tries placing queens row by row and backtracks when a conflict occurs.
+
+🔹 1. print_board(board)
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
+    print()
+
+✔ Explanation
+
+Prints the entire chessboard in matrix form.
+
+Each cell contains "Q" for queen or "0" for empty.
+
+Joins each row with spaces for clean output.
+
+🔹 2. is_safe(board, row, col, n)
+
+This function checks whether it is safe to place a queen at (row, col).
+
+✔ (a) Check Same Column
+for i in range(row):
+    if board[i][col] == "Q":
+        return False
+
+
+Checks upwards in the same column.
+
+Since we place queens row by row, only rows above need checking.
+
+✔ (b) Check Upper-Left Diagonal
+i, j = row - 1, col - 1
+while i >= 0 and j >= 0:
+    if board[i][j] == "Q":
+        return False
+    i -= 1
+    j -= 1
+
+
+Moves diagonally left-up.
+
+If a queen exists on this diagonal, placement is unsafe.
+
+✔ (c) Check Upper-Right Diagonal
+i, j = row - 1, col + 1
+while i >= 0 and j < n:
+    if board[i][j] == "Q":
+        return False
+    i -= 1
+    j += 1
+
+
+Moves diagonally right-up.
+
+Ensures no queen is attacking diagonally from the right.
+
+✔ If no conflicts found:
+return True
+
+
+The position (row, col) is safe for placing a queen.
+
+🔹 3. solve_n_queens(board, row, n)
+
+This is the core backtracking function.
+
+✔ Base Case
+if row == n:
+    print_board(board)
+    return True
+
+
+If all queens are successfully placed (row index reaches n),
+→ print the solution
+→ return True
+
+Allows printing multiple solutions.
+
+✔ Recursive Case – Try All Columns
+res = False
+for col in range(n):
+
+
+Try placing a queen in each column of the current row.
+
+✔ If Position is Safe → Place Queen
+if is_safe(board, row, col, n):
+    board[row][col] = "Q"
+
+
+Place a queen tentatively.
+
+✔ Recurse to Next Row
+res = solve_n_queens(board, row + 1, n) or res
+
+
+Calls the function to place queens in the next row.
+
+or res ensures all solutions are printed.
+
+✔ Backtracking Step
+board[row][col] = "0"
+
+
+Removes the queen if the placement doesn’t lead to a solution.
+
+This allows exploring other possibilities.
+
+✔ Return Status
+return res
+
+
+Returns True if at least one valid solution exists.
+
+🔹 4. Main Program
+n = int(input("Enter the size of the board (N): "))
+board = [["0"] * n for _ in range(n)]
+
+
+Takes board size from user.
+
+Initializes an n × n board with all zeros.
+
+✔ Start Solving
+if not solve_n_queens(board, 0, n):
+    print("No solution exists.")
+
+
+Starts solving from row 0.
+
+Prints a message if no solutions exist.
+
+⭐ Backtracking Flow Summary
+
+Start with row 0
+
+Try all columns in current row
+
+If safe → place queen
+
+Move to next row
+
+If conflict → backtrack and try next column
+
+Continue until all queens are placed
+
+Print all valid arrangements
+
+⭐ Time & Space Complexity
+Approach	Time Complexity	Space Complexity
+Backtracking	O(N!)	O(N²) (board storage)
