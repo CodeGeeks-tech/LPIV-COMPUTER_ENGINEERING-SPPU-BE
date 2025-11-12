@@ -1,0 +1,41 @@
+Introduction
+The objective of this experiment is to build a machine learning model that predicts whether a patient is likely to have diabetes based on medical measurements. The diabetes.csv dataset contains clinical features such as glucose level, blood pressure, skin thickness, insulin level, BMI, age, and more. This is a binary classification problem where the target variable “Outcome” indicates whether the patient is diabetic (1) or non-diabetic (0). The experiment implements the K-Nearest Neighbors (KNN) algorithm, evaluates its performance, and computes metrics such as accuracy, precision, recall, F1-score, and error rate.
+
+Dataset Description
+The dataset contains 768 records of female patients aged 21 and older, with 8 health-related features and one target label. Some attributes may contain zero values, which are not physiologically possible for measurements such as glucose or BMI. Such values need proper preprocessing before training the machine learning model. The dataset is commonly used to test classification algorithms and is well-suited for KNN because it relies on numerical feature comparisons.
+
+Handling Missing and Zero Values
+Certain columns like Glucose, BloodPressure, SkinThickness, Insulin, and BMI contain zero values, which represent missing or incorrect readings. These values are replaced with NaN and then filled with the mean of each column to maintain the dataset’s integrity. This imputation ensures that the model receives realistic numerical values and avoids distortions during distance calculation in KNN.
+
+Feature Selection
+The first 8 columns of the dataset contain numerical attributes used as input features (X), while the target column “Outcome” is used as the output label (Y). These features directly affect the KNN model’s prediction ability since the algorithm classifies new observations based on similarity to training points across all these medical measurements. Using all relevant features ensures better classification accuracy.
+
+Train-Test Split
+To evaluate the model fairly, the dataset is split into training and testing sets using a ratio of 80:20. The training set is used to learn the structure of the data, while the testing set evaluates the generalization performance. Using a fixed random state ensures reproducible results. This separation prevents the model from overfitting and allows assessment of how well it predicts unseen patient data.
+
+K-Nearest Neighbors Algorithm
+KNN is a supervised classification algorithm that assigns a class to a test point based on the classes of its k closest neighbors in the feature space. The default distance metric used is Euclidean distance. In this experiment, k=5 is used, meaning the model compares each test sample with the five closest training points and predicts the class that appears most frequently among them. KNN is simple, intuitive, and effective for medium-sized datasets with numerical features.
+
+Training and Prediction
+The KNN model is trained by storing the training data, as KNN is considered a lazy learner that performs most computation during prediction. When predicting a test sample, the model computes distances between the test point and all training samples, identifies the closest neighbors, and predicts the class based on majority voting. This approach makes KNN computationally expensive during prediction but very easy to train.
+
+Confusion Matrix
+The confusion matrix is a 2×2 table that summarizes prediction performance by displaying true positives, true negatives, false positives, and false negatives. It helps visualize how well the model distinguishes between diabetic and non-diabetic patients. The matrix provides more detailed insights than accuracy alone, especially in cases where one class is more common than the other.
+
+Accuracy Score
+Accuracy is the proportion of correctly predicted samples out of the total test samples. While it provides a quick estimate of model performance, accuracy alone may be misleading if the dataset is imbalanced. In the diabetes dataset, many more non-diabetic cases exist than diabetic ones, so accuracy needs to be supplemented with other metrics such as precision and recall.
+
+Error Rate
+The error rate is defined as 1 − accuracy. It indicates the percentage of incorrect predictions made by the model. A model with a low error rate is considered effective. This metric is useful for understanding how often the model fails to classify patients correctly.
+
+Precision
+Precision measures how many of the predicted positive cases (predicted diabetics) are actually diabetic. It is calculated as True Positives / (True Positives + False Positives). High precision means that the model does not frequently misclassify non-diabetic patients as diabetic, which is important for avoiding unnecessary medical concern.
+
+Recall
+Recall measures how many actual positive cases the model correctly identifies. It is calculated as True Positives / (True Positives + False Negatives). In medical applications, recall is often crucial because failing to detect a diabetic patient can lead to serious health consequences. A model with high recall finds most diabetic patients correctly.
+
+F1 Score
+The F1 score is the harmonic mean of precision and recall, providing a balanced evaluation of the model’s performance. It is especially useful when the dataset has unequal class distribution, as is the case in the diabetes dataset. A higher F1 score indicates that the model performs well across both identifying diabetics and avoiding false alarms.
+
+Conclusion
+The K-Nearest Neighbors algorithm provides a simple yet effective solution for diabetes prediction based on medical measurements. By preprocessing missing values, selecting appropriate features, and evaluating using multiple metrics, the model can give useful insights into patient health. While KNN may not be the fastest algorithm for large datasets, it is easy to implement, interpretable, and suitable for understanding classification behavior in medical prediction tasks.

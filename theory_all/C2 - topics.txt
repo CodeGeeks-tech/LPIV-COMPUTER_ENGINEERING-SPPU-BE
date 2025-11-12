@@ -1,0 +1,35 @@
+Introduction
+A smart contract is a self-executing program stored on the blockchain, where rules and functions are automatically enforced by the Ethereum Virtual Machine (EVM). In this mini-project, we develop a bank account contract that allows a customer to deposit Ether, withdraw Ether, and check their account balance securely. Since the contract is deployed on a blockchain test network, all balances and transactions are transparent, immutable, and cryptographically verified.
+
+Solidity Overview
+Solidity is a contract-oriented, high-level programming language used for writing smart contracts on Ethereum and other EVM-compatible blockchains. It supports features such as state variables, functions, data structures, events, inheritance, and modifiers. Solidity compiles into bytecode executed by the EVM and is strongly influenced by object-oriented programming concepts. It includes special global variables like msg.sender, msg.value, and block.timestamp, which allow contracts to interact with blockchain state.
+
+State Variables
+State variables are permanently stored on the blockchain inside contract storage, making them persistent across function calls. In our Bank contract, we use state variables such as “accOwner” to store the address of the account owner and “balance” to store the customer’s Ether amount. Because blockchain storage is expensive, it is important to use state variables carefully and efficiently.
+
+Constructor
+The constructor is a special function in Solidity that executes only once when the contract is deployed. In our contract, the constructor assigns the deployer’s address to accOwner. This ensures that only the creator of the contract is authorized to use deposit and withdraw functionalities. After deployment, the constructor is never executed again.
+
+Payable Functions
+A payable function is a special type of function in Solidity that can receive Ether. In our Bank contract, the Deposit function is marked payable so that the account owner can send Ether along with the function call. Any function expected to accept or process Ether must include the payable keyword, otherwise the transaction will fail.
+
+msg.sender and msg.value
+msg.sender refers to the address of the user or contract calling the function, while msg.value represents the amount of Ether sent along with the transaction. These are built-in global variables critical for implementing financial logic. In our deposit function, msg.sender ensures only the owner can deposit, and msg.value ensures the deposit amount is greater than zero before updating the balance.
+
+Deposit Operation
+The deposit operation increases the stored balance by the amount of Ether sent with the function call. It uses require statements to ensure the caller is the owner and the deposit amount is greater than zero. A successful deposit modifies the contract storage and therefore consumes a gas fee from the sender’s wallet. Deposits contribute to the contract's Ether balance, making the contract capable of subsequent withdrawals.
+
+Withdraw Operation
+The withdraw function allows the owner to take Ether out of the contract. The function checks that the caller is the account owner and that the requested withdrawal amount does not exceed the available balance. Because withdrawing moves Ether from contract to wallet, additional logic using transfer or call is required. In a real secure implementation, the withdrawal must also protect against re-entrancy attacks by updating balance before transferring Ether.
+
+Show Balance Function
+The showBalance function is a read-only (view) function that displays the current Ether balance held for the account owner. Since the function does not modify blockchain state, it does not cost gas when called externally. This function uses require to ensure that only the owner can access their balance.
+
+Gas Fees
+Gas fees represent the computational cost of executing transactions on Ethereum. Every operation, especially storage modification, consumes a specific amount of gas. Functions like deposit and withdraw require more gas because they update the blockchain state. Read-only view functions do not require gas when executed locally since no state changes occur.
+
+Test Network Deployment
+Deployment is done on Ethereum test networks such as Sepolia, Goerli, or Ganache. Test networks allow developers to test smart contracts without spending real Ether. Upon deployment, the constructor is executed, and a deployment gas fee is charged. Using tools like Remix, MetaMask, and Etherscan testnet explorers, the behavior, transaction costs, and gas usage can be monitored easily.
+
+Blockchain Security Considerations
+Smart contracts must include require statements to validate inputs and enforce access control, preventing unauthorized use. Additionally, withdrawal operations must avoid re-entrancy attacks by updating balances before transferring Ether. Incorrect usage of msg.value, lack of payable functions, or improper permission checks may result in loss of funds or vulnerabilities.
