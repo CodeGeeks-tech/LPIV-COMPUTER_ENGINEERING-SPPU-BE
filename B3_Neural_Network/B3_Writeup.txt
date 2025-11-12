@@ -1,0 +1,99 @@
+B(3)  Given a bank customer, build a neural network-based classifier that can determine whether they will leave or not in the next 6 months. 
+
+THEORY
+
+Customer churn refers to the likelihood of customers leaving a company within a given period. Predicting churn is essential for banks to identify at-risk customers and take preventive measures. In this task, a binary classification neural network is built to predict whether a bank customer will leave within the next 6 months.
+
+The dataset (Churn_Modelling.csv) contains demographic, geographic, and financial information. Features such as Geography and Gender are categorical, while others are numerical. Data preprocessing includes one-hot encoding and standardization. The model is an Artificial Neural Network (ANN) with hidden layers, dropout for regularization, and a sigmoid output for binary classification.
+
+The ANN is trained using binary cross-entropy loss and evaluated using accuracy and confusion matrix.
+
+
+ALGORITHM
+Neural Network-Based Churn Prediction Algorithm
+
+Start
+
+Import dataset and select relevant features
+
+Separate inputs (X) and target (Y = Churn column)
+
+Preprocess data:
+  • One-hot encode categorical variables
+  • Standardize numerical features
+
+Split into training and testing sets
+
+Build ANN with:
+  • Input layer
+  • Two hidden layers (ReLU activation)
+  • Dropout layers to prevent overfitting
+  • Output layer (Sigmoid activation for binary output)
+
+Compile model using Adam optimizer
+
+Train ANN for 100 epochs with batch size of 32
+
+Predict on test data using threshold = 0.5
+
+Compute confusion matrix and accuracy
+
+Interpret results
+
+End
+
+
+
+                     +----------------+
+                     |     Start      |
+                     +--------+-------+
+                              |
+                              v
+             +----------------+------------------+
+             | Load Churn_Modelling.csv dataset |
+             +----------------+------------------+
+                              |
+                              v
+            +-----------------+-----------------------+
+            | Select features (X) and target (Y)      |
+            +-----------------+-----------------------+
+                              |
+                              v
+         +--------------------+-----------------------------+
+         | Preprocess: One-hot encode & standardize data   |
+         +--------------------+-----------------------------+
+                              |
+                              v
+       +----------------------+---------------------------+
+       | Train-test split (80% train, 20% test)           |
+       +----------------------+---------------------------+
+                              |
+                              v
+     +------------------------+------------------------+
+     | Build Neural Network (Input → Hidden → Output) |
+     +------------------------+------------------------+
+                              |
+                              v
+           +------------------+------------------+
+           | Train ANN with 100 epochs           |
+           +------------------+------------------+
+                              |
+                              v
+            +-----------------+-----------------------+
+            | Predict churn (y_pred > 0.5 → churn)   |
+            +-----------------+-----------------------+
+                              |
+                              v
+      +-----------------------+------------------------+
+      | Evaluate: Confusion Matrix & Accuracy          |
+      +-----------------------+------------------------+
+                              |
+                              v
+                        +-----+-----+
+                        |   End     |
+                        +-----------+
+
+
+CONCLUSION
+
+A Neural Network-based binary classifier was successfully implemented to predict whether a bank customer will churn within the next 6 months. By preprocessing the data, encoding categorical fields, scaling inputs, and designing a robust ANN model, high predictive accuracy was achieved. The results demonstrate that neural networks are powerful tools for customer retention analytics, enabling banks to proactively identify at-risk customers and take corrective actions.

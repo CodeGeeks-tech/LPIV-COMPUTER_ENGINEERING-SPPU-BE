@@ -1,0 +1,160 @@
+1. What is the purpose of the diabetes.csv dataset?
+
+Answer:
+It contains medical diagnostic measurements to predict whether a patient is likely to have diabetes (Outcome = 1 or 0).
+
+2. What does the Outcome column represent?
+
+Answer:
+It is the target variable:
+
+1 → Patient has diabetes
+
+0 → Patient does not have diabetes
+
+3. Why are some zero values replaced with NaN in preprocessing?
+
+Answer:
+Because zero is an invalid value for features like BloodPressure, BMI, etc.
+These are replaced with mean values.
+
+4. Why use mean replacement for missing values?
+
+Answer:
+Mean imputation is simple and preserves the overall distribution without removing rows.
+
+5. What is KNN (K-Nearest Neighbors)?
+
+Answer:
+A distance-based classification algorithm that assigns a class based on the majority vote of the k nearest neighbors.
+
+6. What value of k is used in the program?
+
+Answer:
+k = 5 neighbors.
+
+7. Why is scaling important in KNN?
+
+Answer:
+Because KNN depends on distance, and features with larger scales dominate smaller ones.
+(Note: your code does not scale, but ideally should.)
+
+8. What distance metric does KNN use by default?
+
+Answer:
+Euclidean distance.
+
+9. What is the role of train_test_split()?
+
+Answer:
+To divide the data into training (80%) and testing (20%) sets for proper evaluation.
+
+10. What does knn.fit(X_train, Y_train) do?
+
+Answer:
+Stores all training samples (lazy learning).
+No actual model is built — classification happens during prediction.
+
+11. What does the confusion matrix represent?
+
+Answer:
+A 2×2 matrix showing:
+
+True Positives (TP)
+
+True Negatives (TN)
+
+False Positives (FP)
+
+False Negatives (FN)
+
+12. What is accuracy?
+
+Answer:
+Accuracy = (TP + TN) / (Total samples)
+
+13. What is error rate?
+
+Answer:
+Error rate = 1 – accuracy
+
+14. What does precision measure?
+
+Answer:
+Out of all predicted diabetic cases, how many were actually diabetic.
+Precision = TP / (TP + FP)
+
+15. What does recall measure?
+
+Answer:
+Out of actual diabetic patients, how many were correctly detected.
+Recall = TP / (TP + FN)
+
+16. What does the F1-score represent?
+
+Answer:
+Harmonic mean of precision and recall; good for imbalanced datasets.
+
+17. Why is diabetes prediction considered a good use case for KNN?
+
+Answer:
+Because it is a binary classification problem with continuous medical features.
+
+18. What does iloc[:, :8] select?
+
+Answer:
+The first 8 columns, all of which are feature variables.
+
+19. Why does the code convert zeros to NaN before filling with mean?
+
+Answer:
+To correctly apply mean imputation only to intended missing-like values.
+
+20. Why do we use random_state=0?
+
+Answer:
+To make results reproducible by ensuring the same random split each run.
+
+21. Why is KNN considered a lazy learner?
+
+Answer:
+It simply stores the training data and does not build a mathematical model.
+
+22. What happens if k is too small?
+
+Answer:
+The model becomes sensitive to noise (overfitting).
+
+23. What happens if k is too large?
+
+Answer:
+The model becomes too generalized and may misclassify (underfitting).
+
+24. What kind of dataset is diabetes.csv? Balanced or imbalanced?
+
+Answer:
+Imbalanced — typically around:
+
+65% non-diabetic
+
+35% diabetic
+Hence metrics like recall and F1 are important.
+
+25. What is the final output of the program?
+
+Answer:
+It prints:
+
+Confusion matrix
+
+Accuracy
+
+Error rate
+
+Precision
+
+Recall
+
+F1-score
+
+This helps evaluate the model’s overall performance.

@@ -1,0 +1,44 @@
+Introduction
+Customer churn refers to the phenomenon where customers stop using a company’s services. In the banking industry, predicting customer churn is crucial because retaining existing customers is more cost-effective than acquiring new ones. This project builds an Artificial Neural Network (ANN) model that predicts whether a bank customer will leave (churn) in the next six months using various demographic, financial, and account activity features. The goal is to help banks proactively identify at-risk customers and take corrective action.
+
+Dataset Description
+The dataset used is the Churn_Modelling.csv file, which contains 10 independent variables describing each customer's profile, including geography, gender, age, account balance, credit score, number of products, estimated salary, and active membership status. The target variable, “Exited,” indicates whether the customer left the bank (1) or stayed (0). The dataset contains 10,000 customer entries, making it suitable for training a neural network with sufficient diversity.
+
+Feature Engineering
+Before training the ANN, categorical variables such as Geography and Gender need to be encoded into numerical format because neural networks process only numeric data. OneHotEncoder is used to convert categorical text values into binary columns without losing category meaning. Additionally, CustomerId and Surname are removed because they do not influence churn behavior. This step ensures only meaningful inputs are passed to the neural network.
+
+Data Scaling
+ANNs are sensitive to varying scales of input features. To prevent larger features from dominating smaller ones, StandardScaler is used to normalize all numeric columns. This transformation standardizes the data to mean 0 and standard deviation 1, helping the network converge faster and improving overall model performance. Scaling is essential for gradient-based learning methods such as ANNs.
+
+Train-Test Split
+The dataset is split into 80% training data and 20% testing data using train_test_split. The training set is used to learn the optimal weights of the neural network, while the test set evaluates its performance on unseen customers. A fixed random state ensures that results are reproducible. This separation prevents overfitting and ensures a fair evaluation of predictive performance.
+
+Artificial Neural Network Architecture
+The ANN model consists of an input layer, two hidden layers, and one output layer. Each hidden layer uses ReLU activation, which introduces non-linearity and helps the network learn complex decision boundaries. The output layer uses sigmoid activation to produce a probability between 0 and 1, representing the chance of churn. The ANN is built using the Sequential API from TensorFlow Keras.
+
+Dropout Regularization
+Dropout layers are added after each hidden layer to prevent overfitting. Dropout randomly disables a fraction of neurons during training, encouraging the network to learn more general patterns rather than memorizing the training data. This improves model robustness and ensures better performance on unseen samples.
+
+Compilation of the Model
+The model is compiled using the Adam optimizer, which is an advanced gradient-based optimization algorithm. It adapts the learning rate during training for faster convergence. Binary cross-entropy is used as the loss function because churn prediction is a binary classification problem. The model also tracks accuracy as a performance metric during training.
+
+Model Training
+The model is trained for 100 epochs with a batch size of 32. During training, the ANN adjusts weights through backpropagation to minimize the loss function. A validation split of 10% is used to monitor how well the model generalizes while training. This process results in an ANN that learns relationships between customer features and churn probability.
+
+Prediction
+After training, the ANN predicts probabilities for each customer in the test dataset. These probabilities are converted into binary labels using a threshold of 0.5: values above 0.5 mean the customer is likely to churn. This helps evaluate how effectively the ANN distinguishes between customers who will stay vs. leave the bank.
+
+Confusion Matrix
+The confusion matrix provides a summary of prediction results, showing true positives, true negatives, false positives, and false negatives. This helps understand the types of errors the model makes. For churn prediction, false negatives are particularly dangerous because they represent customers who leave but were predicted to stay.
+
+Accuracy Score
+Accuracy measures how many predictions the model classified correctly out of the total test examples. However, churn datasets are often imbalanced (more non-churners than churners), so accuracy alone may not fully represent model performance. Still, it provides a quick overview of overall predictive power.
+
+Importance of Precision and Recall
+Precision measures how many predicted churners actually churned, while recall measures how many actual churners the model successfully identified. For banks, recall is critical because failing to detect at-risk customers can result in significant revenue loss. Precision and recall give a deeper understanding beyond basic accuracy.
+
+Model Limitations
+ANNs require a large amount of data, and performance depends heavily on feature quality. Although the model performs well, it may still struggle with highly imbalanced datasets. The model's "black-box" nature makes it difficult to interpret specific reasons behind churn, unlike simpler algorithms such as decision trees. However, its predictive strength makes it a strong choice for churn analysis.
+
+Conclusion
+The ANN-based churn prediction model successfully identifies customers likely to leave the bank within six months. By using preprocessing techniques, categorical encoding, scaling, dropout regularization, and neural network training, the model achieves high accuracy and recalls important patterns from the data. This project demonstrates the effectiveness of deep learning in customer retention strategies and highlights its potential use in real-world financial applications.

@@ -1,0 +1,156 @@
+1. What is the goal of the Titanic survival prediction project?
+
+Answer:
+To build a machine learning model that predicts whether a passenger survived (1) or not (0) based on demographic and travel details.
+
+2. What features are selected from the Titanic dataset?
+
+Answer:
+Pclass, Sex, Age, SibSp, Parch, Fare, and Embarked.
+
+3. Why do we drop other columns like Name and Ticket?
+
+Answer:
+They do not directly contribute to prediction (or require complex feature engineering), so they’re removed for simplicity.
+
+4. How are missing Age values handled?
+
+Answer:
+They are replaced using the mean of the Age column.
+
+5. How are missing Embarked values handled?
+
+Answer:
+They are filled with the mode (most frequent value).
+
+6. Why is LabelEncoder used?
+
+Answer:
+To convert categorical features (Sex, Embarked) into numeric form for use in machine learning models.
+
+7. What does the Survived column represent?
+
+Answer:
+It is the target variable:
+
+1 → Passenger survived
+
+0 → Passenger did not survive
+
+8. What is the role of RandomForestClassifier in this project?
+
+Answer:
+It combines multiple decision trees using bagging to produce a more accurate and stable model.
+
+9. Why are 100 trees used (n_estimators=100)?
+
+Answer:
+Having more trees generally improves accuracy and reduces variance, up to a point.
+
+10. What is the train-test split ratio?
+
+Answer:
+75% training and 25% testing.
+
+11. What does accuracy_score measure?
+
+Answer:
+The percentage of correctly predicted samples from the test set.
+
+12. What is a confusion matrix?
+
+Answer:
+A table displaying:
+
+True Positives (TP)
+
+True Negatives (TN)
+
+False Positives (FP)
+
+False Negatives (FN)
+
+Used to evaluate classification performance.
+
+13. What does the classification report show?
+
+Answer:
+Precision, recall, F1-score, and support for each class (0 and 1).
+
+14. Why is the Titanic dataset considered imbalanced?
+
+Answer:
+Survival is not evenly distributed — more people died than survived, affecting model performance.
+
+15. Why is Random Forest a good choice for this dataset?
+
+Answer:
+Because it:
+
+Handles both numerical and categorical data
+
+Deals well with missing values
+
+Reduces overfitting using bagging
+
+Performs well with small-to-medium datasets
+
+16. What is entropy in decision trees?
+
+Answer:
+A measure of impurity or disorder in the dataset.
+
+17. What is Gini impurity?
+
+Answer:
+Another impurity measure; lower Gini means cleaner splits.
+
+(Random Forest uses Gini by default.)
+
+18. How does Random Forest reduce overfitting?
+
+Answer:
+By averaging multiple decision trees trained on random subsets of data and features.
+
+19. Why do we convert Sex and Embarked to numeric codes?
+
+Answer:
+ML models cannot interpret strings — they require numeric values.
+
+20. What role does socio-economic class (Pclass) play?
+
+Answer:
+Higher-class passengers had better survival chances, making it an important feature.
+
+21. Why is ‘Fare’ an important predictor?
+
+Answer:
+Fare correlates with social class → affects survival probability due to access to lifeboats.
+
+22. What is the purpose of y_pred = model.predict(X_test)?
+
+Answer:
+It generates survival predictions for unseen test data.
+
+23. What is F1-score and why is it important?
+
+Answer:
+It is the harmonic mean of precision and recall, useful in datasets with class imbalance (like Titanic).
+
+24. Why do we set random_state=42?
+
+Answer:
+To ensure reproducibility of results across runs.
+
+25. What is the expected output of this project?
+
+Answer:
+The algorithm predicts:
+
+Which passengers survived
+
+Model accuracy
+
+Confusion matrix
+
+Full classification report (precision, recall, F1-score)

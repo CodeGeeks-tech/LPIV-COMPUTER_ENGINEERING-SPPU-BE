@@ -1,0 +1,207 @@
+✅ CODE EXPLANATION — Bank Customer Churn Prediction Using Artificial Neural Network (ANN)
+
+This program predicts whether a bank customer will leave/churn within the next 6 months using an Artificial Neural Network (ANN).
+It performs data preprocessing, categorical encoding, scaling, ANN construction, training, and evaluation.
+
+📌 1. Import Required Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix, accuracy_score
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+
+✔ Explanation:
+
+pandas → loading and handling datasets
+
+train_test_split → divide data into training/testing
+
+OneHotEncoder → convert categorical columns to numeric
+
+StandardScaler → normalizes numerical data
+
+ColumnTransformer → applies different transformations to different columns
+
+Pipeline → connects preprocessing steps
+
+Sequential → ANN model
+
+Dense → ANN layers
+
+Dropout → prevents overfitting
+
+📌 2. Load Dataset
+dataset = pd.read_csv('Churn_Modelling.csv', index_col = 'RowNumber')
+dataset.head()
+
+✔ Explanation:
+
+Loads the Churn_Modelling.csv dataset.
+
+Sets "RowNumber" as index (not used for prediction).
+
+The dataset includes columns like:
+
+CustomerID, Surname
+
+Geography
+
+Gender
+
+Age
+
+Tenure
+
+Balance
+
+Estimated Salary
+
+Exited (Target variable — 1 = customer left, 0 = customer stayed)
+
+📌 3. Select Features and Target
+X = dataset.iloc[:, 2:12]   # drop CustomerId and Surname
+Y = dataset.iloc[:, 12].values
+
+✔ Explanation:
+
+X = input features (columns 2–11)
+
+Y = churn label (“Exited”)
+
+We drop non-useful columns:
+
+RowNumber, CustomerId, Surname → not helpful for prediction.
+
+📌 4. Preprocessing: Encoding + Scaling
+pipeline = Pipeline([
+    ('preprocess', ColumnTransformer(
+        transformers=[
+            ('gender', OneHotEncoder(drop='first'), ['Gender']),
+            ('geo', OneHotEncoder(drop='first'), ['Geography'])
+        ],
+        remainder='passthrough'
+    )),
+    ('scaler', StandardScaler())
+])
+X = pipeline.fit_transform(X)
+
+✔ Explanation:
+What happens here?
+
+One-hot encoding
+Converts categorical columns:
+
+Geography
+
+Gender
+into numerical columns (0/1).
+
+drop='first' avoids dummy variable trap.
+
+remainder='passthrough' → keeps numerical columns unchanged.
+
+StandardScaler → normalizes all features, improving ANN training.
+
+📌 5. Splitting Train/Test Data
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
+
+✔ Explanation:
+
+80% training
+
+20% testing
+
+random_state=0 ensures consistent results.
+
+📌 6. Build the Artificial Neural Network
+classifier = Sequential()
+classifier.add(Dense(6, activation='relu', input_shape=(X_train.shape[1],)))
+classifier.add(Dropout(0.1))
+classifier.add(Dense(6, activation='relu'))
+classifier.add(Dropout(0.1))
+classifier.add(Dense(1, activation='sigmoid'))
+
+✔ Explanation:
+ANN Architecture:
+Layer	Type	Units	Activation
+Input	Dense	6 neurons	ReLU
+Hidden	Dense	6 neurons	ReLU
+Output	Dense	1 neuron	Sigmoid
+Why?
+
+ReLU: works well for hidden layers.
+
+Sigmoid: outputs probability between 0–1 for binary classification (churn vs no churn).
+
+Dropout(0.1): turns off 10% neurons randomly to prevent overfitting.
+
+📌 7. Compile the ANN
+classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+✔ Explanation:
+
+Adam optimizer → efficient learning.
+
+Binary crossentropy → suitable for binary output.
+
+Accuracy → performance metric.
+
+📌 8. Train ANN
+history = classifier.fit(
+    X_train, y_train,
+    batch_size=32, 
+    epochs=100,
+    validation_split=0.1,
+    verbose=2
+)
+
+✔ Explanation:
+
+batch_size=32 → updates weights every 32 samples
+
+epochs=100 → 100 full passes over the dataset
+
+validation_split=0.1 → 10% of training used for validation
+
+verbose=2 → cleaner training output
+
+📌 9. Predicting Test Data
+y_pred = classifier.predict(X_test)
+y_pred = (y_pred > 0.5).astype(int)
+
+✔ Explanation:
+
+ANN outputs probability (0 to 1)
+
+Converting to:
+
+1 → Customer will leave
+
+0 → Customer stays
+
+Threshold = 0.5
+
+📌 10. Confusion Matrix and Accuracy
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(((cm[0][0] + cm[1][1])* 100) / len(y_test), '% of data was classified correctly')
+
+✔ Explanation:
+Confusion Matrix:
+	Predicted Stay	Predicted Leave
+Actual Stay	TN	FP
+Actual Leave	FN	TP
+
+Accuracy = (Correct Predictions / Total Data)
+
+🎯 FINAL SUMMARY OF WHAT THE CODE DOES
+
+✔ Loads bank customer dataset
+✔ Preprocesses categorical & numerical data
+✔ Builds a neural network with 2 hidden layers
+✔ Trains the ANN to predict whether a customer will churn
+✔ Tests the model on unseen data
+✔ Prints accuracy and confusion matrix

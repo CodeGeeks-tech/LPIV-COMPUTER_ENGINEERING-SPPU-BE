@@ -1,0 +1,161 @@
+✅ CODE EXPLANATION – Email Spam Classification using SVM & KNN
+
+This Python program performs binary classification of emails to determine whether an email is:
+
+0 → Not Spam (Normal State)
+
+1 → Spam (Abnormal State)
+
+Two machine-learning models are used and their performance is compared:
+
+Support Vector Machine (SVM)
+
+K-Nearest Neighbors (KNN)
+
+📌 1. Importing Required Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
+
+✔ Explanation:
+
+pandas → load and process CSV.
+
+train_test_split → split dataset into training & testing.
+
+SVC → Support Vector Classifier (SVM).
+
+KNeighborsClassifier → KNN algorithm.
+
+accuracy_score → evaluate model performance.
+
+📌 2. Loading Dataset
+df = pd.read_csv("emails.csv")
+df.head()
+df.isnull().sum()
+
+✔ Explanation:
+
+The dataset emails.csv contains thousands of features representing word frequencies in emails.
+
+head() prints first few rows.
+
+isnull().sum() checks for missing values.
+
+Dataset columns typically include:
+
+Column	Meaning
+word_freq_x	% of words in email that contain "x"
+char_freq_y	frequency of special characters
+spam	1 = spam, 0 = not spam
+📌 3. Separating Features and Target
+X = df.iloc[:,1:3001]  # word frequency features
+Y = df.iloc[:,-1].values # 1 = spam, 0 = not spam
+
+✔ Explanation:
+
+X contains all feature columns (word frequencies).
+
+Y contains the last column → spam label.
+
+The first column is usually an index → so features start from column 1.
+
+📌 4. Splitting Training and Testing Sets
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state=42)
+
+✔ Explanation:
+
+75% data → training
+
+25% data → testing
+
+random_state=42 ensures reproducible results.
+
+📌 5. SUPPORT VECTOR MACHINE (SVM)
+✔ Model Creation
+svc = SVC(C=1.0, kernel='rbf', gamma='auto')
+
+
+C=1.0: Controls margin hardness.
+
+kernel='rbf': Radial Basis Function; good for non-linear classification.
+
+gamma='auto': Uses 1 / number_of_features.
+
+✔ Train the Model
+svc.fit(X_train, y_train)
+
+✔ Predict
+svc_pred = svc.predict(X_test)
+
+✔ Print Performance
+print("SVM Accuracy:", accuracy_score(y_test, svc_pred))
+print("SVM Classification Report:\n", classification_report(y_test, svc_pred))
+print("SVM Confusion Matrix:\n", confusion_matrix(y_test, svc_pred))
+
+✔ Confusion Matrix
+	Predicted Not Spam	Predicted Spam
+Actual Not Spam	True Negative (TN)	False Positive (FP)
+Actual Spam	False Negative (FN)	True Positive (TP)
+📌 6. K-NEAREST NEIGHBORS (KNN)
+✔ Model Creation
+knn = KNeighborsClassifier(n_neighbors=7)
+
+
+Uses 7 nearest neighbors for classification.
+
+✔ Training KNN
+knn.fit(X_train, y_train)
+
+✔ Predicting
+knn_pred = knn.predict(X_test)
+
+✔ Performance Results
+print("KNN Accuracy:", knn.score(X_test, y_test))
+print("KNN Classification Report:\n", classification_report(y_test, knn_pred))
+print("KNN Confusion Matrix:\n", confusion_matrix(y_test, knn_pred))
+
+📌 7. SUMMARY OF WHAT THE CODE DOES
+
+✔ Loads email dataset
+✔ Extracts features (word frequencies) and labels (spam/not spam)
+✔ Splits data into training and test sets
+✔ Trains two machine-learning models:
+
+Support Vector Machine
+
+K-Nearest Neighbors
+
+✔ Predicts spam/not spam
+✔ Evaluates and compares accuracy
+✔ Prints classification report & confusion matrix
+
+⭐ KEY CONCEPTS EXAMINER MAY ASK
+1. Why use SVM?
+
+Works well on high-dimensional data (like 3000 features).
+
+Good for text classification.
+
+RBF kernel handles non-linear separation.
+
+2. Why KNN?
+
+Simple, intuitive algorithm.
+
+Good baseline classifier.
+
+3. Difference: SVM vs KNN
+SVM	KNN
+Model-based	Instance-based
+Faster during prediction	Slow prediction for large datasets
+Good for high-dimensional data	Requires normalization & distance measures
+4. What is test_size=0.25?
+
+25% test data, 75% training data.
+
+5. Why confusion matrix?
+
+Shows false positives, false negatives → important for spam detection.

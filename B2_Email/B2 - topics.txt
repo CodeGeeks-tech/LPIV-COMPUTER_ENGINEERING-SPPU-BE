@@ -1,0 +1,46 @@
+EMAIL SPAM CLASSIFICATION – THEORY WRITEUP
+
+Introduction
+Email spam detection is a classic binary classification problem where incoming emails are categorized as either “Spam” or “Not Spam.” The goal of this experiment is to build machine learning models using K-Nearest Neighbors (KNN) and Support Vector Machine (SVM) to automatically classify emails based on extracted features such as word frequencies. Effective spam detection protects users from phishing, malware, fraud, and unwanted advertisements. This project evaluates and compares the performance of KNN and SVM on the emails.csv dataset.
+
+Dataset Description
+The dataset used contains thousands of email samples with up to 3000 word-frequency features extracted from each message. These features represent how often specific keywords appear in each email. The target variable is binary: 1 indicates spam, and 0 indicates non-spam. The dataset is numeric and high-dimensional, making it suitable for models like SVM, which perform well with large feature spaces.
+
+Feature Selection
+The dataset consists of word-frequency columns ranging from index 1 to 3000, which serve as input features (X). The last column represents the target label (Y). These features capture the presence of suspicious words often used by spam messages. Selecting these columns allows the model to learn differences in language patterns between spam and non-spam emails.
+
+Train-Test Split
+To evaluate the model fairly, the data is divided into training and testing sets in a 75:25 ratio. The training set is used to learn patterns in email content, while the test set evaluates how well the model generalizes to unseen emails. Using a fixed random state ensures the experiment is reproducible. This separation helps avoid overfitting and provides an honest performance estimate.
+
+K-Nearest Neighbors Algorithm
+KNN is a distance-based classifier that classifies new emails based on their similarity to k nearest neighbors in the feature space. In this experiment, k = 7 is used. The Euclidean distance is computed between the test email and all training samples, and the most common class among the nearest neighbors becomes the prediction. KNN is intuitive and effective but computationally expensive for high-dimensional datasets like this one.
+
+Support Vector Machine Algorithm
+SVM is a powerful classifier that finds the optimal hyperplane separating spam and non-spam emails. Using the RBF kernel helps handle non-linear decision boundaries in the feature space. SVM performs extremely well on high-dimensional data because its optimization depends on support vectors rather than the entire dataset. It is typically faster and more accurate than KNN for large feature sets like email word frequencies.
+
+Model Training
+The KNN model is trained simply by storing the training data, while SVM undergoes optimization to find the best hyperplane. SVM uses kernel tricks and regularization (C parameter) to avoid overfitting. The models then predict whether each test email is spam or not based on learned patterns. Training both models helps compare lazy learning (KNN) against margin-based learning (SVM).
+
+Model Prediction
+Both models classify each test email and generate predicted labels. These predictions are compared with the actual labels to compute accuracy and other evaluation metrics. KNN bases predictions entirely on nearest neighbors, while SVM uses the learned decision boundary. Proper evaluation ensures understanding of each algorithm’s strengths.
+
+Confusion Matrix
+The confusion matrix summarizes prediction results by showing True Positives (correct spam), True Negatives (correct non-spam), False Positives (normal emails wrongly marked as spam), and False Negatives (spam emails missed). This matrix provides deeper insight into model behavior, especially in understanding how models handle borderline cases.
+
+Accuracy Score
+Accuracy measures how many emails were classified correctly out of the total. While accuracy gives an overall measure, it may not fully reflect real performance if the dataset is imbalanced. In spam detection, false negatives can be dangerous because missed spam emails may contain phishing or malicious content.
+
+Precision
+Precision measures the proportion of predicted spam emails that are truly spam. High precision is important to avoid marking harmless emails as spam, which can cause user frustration. Precision helps evaluate how reliable the model’s positive predictions are.
+
+Recall
+Recall measures how many actual spam emails were successfully detected by the model. A high recall score is essential for catching as much spam as possible. In spam detection, recall is often more important than precision because undetected spam can be harmful.
+
+F1 Score
+The F1-score is the harmonic mean of precision and recall and provides a balanced measure of model performance. It is useful when classes are imbalanced, which is common in spam datasets. Higher F1-scores indicate better classification performance.
+
+Comparison Between KNN and SVM
+SVM typically performs better than KNN for high-dimensional datasets, providing higher accuracy, precision, recall, and F1-score. SVM is also faster during prediction because it uses only support vectors, while KNN computes distances to all training points. KNN may struggle with large feature spaces because of the curse of dimensionality. For email spam detection, SVM is generally the more effective and efficient model.
+
+Conclusion
+This experiment demonstrates how machine learning techniques like KNN and SVM can effectively classify emails as spam or non-spam. The SVM model typically outperforms KNN due to its ability to handle high-dimensional data more efficiently. The project highlights important ML steps: data preprocessing, model training, prediction, and evaluation. Email spam detection remains a crucial application of binary classification and is widely used in modern mail filtering systems.

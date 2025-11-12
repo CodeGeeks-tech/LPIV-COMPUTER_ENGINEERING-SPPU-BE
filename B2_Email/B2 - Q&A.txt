@@ -1,0 +1,150 @@
+1. What type of classification problem is email spam detection?
+
+Answer:
+It is a binary classification problem with two classes:
+
+0 → Not Spam
+
+1 → Spam
+
+2. What features are used in the given dataset?
+
+Answer:
+The dataset contains word frequency values (columns 1–3000), representing how often each word appears in an email.
+
+3. Why do we use train_test_split()?
+
+Answer:
+To divide data into training (learn patterns) and testing (evaluate performance) subsets.
+
+4. What percentage of data is used for testing?
+
+Answer:
+25% (test_size = 0.25).
+
+5. What is K-Nearest Neighbors (KNN)?
+
+Answer:
+A non-parametric algorithm that classifies a data point based on the majority class of its k nearest neighbors.
+
+6. What value of k is used in this program?
+
+Answer:
+k = 7 neighbors.
+
+7. Why does KNN require feature scaling usually?
+
+Answer:
+Because distance-based algorithms are sensitive to different feature ranges.
+(Though your code does not apply scaling.)
+
+8. What type of classifier is SVM?
+
+Answer:
+A margin-based classifier that finds the optimal hyperplane separating two classes.
+
+9. What kernel is used for SVM here?
+
+Answer:
+kernel='rbf' (Radial Basis Function), which handles non-linear boundaries.
+
+10. What does gamma='auto' do?
+
+Answer:
+It sets gamma to 1/n_features, controlling how far the influence of a training example reaches.
+
+11. What performance metric is printed first for both models?
+
+Answer:
+Accuracy Score, which measures the percentage of correctly classified emails.
+
+12. What is a confusion matrix?
+
+Answer:
+A table showing:
+
+True Positives (TP)
+
+True Negatives (TN)
+
+False Positives (FP)
+
+False Negatives (FN)
+
+Used to assess classifier quality.
+
+13. Why is accuracy not always a reliable metric for spam detection?
+
+Answer:
+Because datasets may be imbalanced. Other metrics like recall and F1-score are more informative.
+
+14. What does “classification_report” print?
+
+Answer:
+Precision, recall, F1-score, and support for each class.
+
+15. What does precision measure?
+
+Answer:
+Out of all emails predicted as spam, how many were actually spam.
+Precision = TP / (TP + FP)
+
+16. What does recall measure?
+
+Answer:
+Out of all actual spam emails, how many the model correctly detected.
+Recall = TP / (TP + FN)
+
+17. Which classifier generally performs better on high-dimensional text data?
+
+Answer:
+SVM, because it handles sparse high-dimensional data effectively.
+
+18. Why might KNN perform poorly on this dataset?
+
+Answer:
+Because the dataset has thousands of features, making distance calculations expensive and less meaningful (curse of dimensionality).
+
+19. What is the purpose of using iloc[:, 1:3001]?
+
+Answer:
+To extract word-frequency features, excluding the first non-numeric column.
+
+20. Why do we skip the first column of the dataset?
+
+Answer:
+It likely contains an ID or non-feature column (common in email datasets).
+
+21. What does SVC(C=1.0) mean?
+
+Answer:
+C controls regularization strength.
+Lower C → allows more misclassifications (more generalization)
+Higher C → stricter classification (risk of overfitting)
+
+22. What is overfitting?
+
+Answer:
+When a model performs well on training data but poorly on test data because it memorized patterns instead of learning general ones.
+
+23. Which model in your program is more likely to overfit?
+
+Answer:
+SVM with a high C or KNN with very small k may overfit.
+
+24. Why is KNN considered a lazy learner?
+
+Answer:
+It does not learn a model; it stores data and performs classification during prediction only.
+
+25. Why is SVM often preferred in spam filtering applications?
+
+Answer:
+Because it works very well with:
+
+High-dimensional data
+
+Sparse vectors
+
+Non-linear boundaries (with RBF kernel)
+And provides high accuracy.

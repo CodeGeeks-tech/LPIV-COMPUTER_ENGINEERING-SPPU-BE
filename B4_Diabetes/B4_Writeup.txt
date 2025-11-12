@@ -1,0 +1,141 @@
+B(4) Implement K-Nearest Neighbors algorithm on diabetes.csv dataset. Compute confusion matrix, accuracy, error rate, precision and recall on the given dataset. 
+
+THEORY
+
+The PIMA Diabetes dataset contains diagnostic measurements for female patients. The problem is a binary classification task where the goal is to determine whether a patient has diabetes (Outcome = 1) or not (Outcome = 0). The K-Nearest Neighbors (KNN) algorithm classifies new data points based on the majority class among the ‘k’ closest training samples using distance metrics such as Euclidean distance.
+
+This dataset contains missing or zero values, so preprocessing is performed by replacing zeros with the mean of respective columns. After preprocessing, a KNN model (k = 5) is trained and evaluated using performance metrics: accuracy, error rate, precision, recall, and F1-score.
+
+
+ALGORITHM
+K-Nearest Neighbors (KNN) Algorithm
+
+Start
+
+Load diabetes.csv dataset
+
+Identify missing/zero values and replace them with column means
+
+Separate dataset into features (X) and labels (Y)
+
+Split into training and testing sets (80% train, 20% test)
+
+Choose value of k (here, k = 5)
+
+Fit the KNN model on training data
+
+Predict values for the test dataset
+
+Compute performance metrics:
+  • Confusion matrix
+  • Accuracy
+  • Error rate
+  • Precision
+  • Recall
+  • F1 score
+
+Display evaluation results
+
+End
+
+Time Complexity: O(n × d × k)
+Space Complexity: O(n × d)
+
+
+
+
+                    +----------------+
+                    |     Start      |
+                    +--------+-------+
+                             |
+                             v
+         +-------------------+------------------------+
+         | Load diabetes.csv dataset                 |
+         +-------------------+------------------------+
+                             |
+                             v
+     +-----------------------+---------------------------+
+     | Replace zeros with column means for selected cols |
+     +-----------------------+---------------------------+
+                             |
+                             v
+          +------------------+-------------------------+
+          | Separate X (features) and Y (target)       |
+          +------------------+-------------------------+
+                             |
+                             v
+      +----------------------+--------------------------+
+      | Split into training and testing sets            |
+      +----------------------+--------------------------+
+                             |
+                             v
+          +------------------+-------------------------+
+          | Train KNN classifier (k = 5)               |
+          +------------------+-------------------------+
+                             |
+                             v
+            +----------------+-------------------+
+            | Predict class for test samples     |
+            +----------------+-------------------+
+                             |
+                             v
+     +-----------------------+---------------------------+
+     | Compute confusion matrix and evaluation metrics   |
+     +-----------------------+---------------------------+
+                             |
+                             v
+                       +-----+-----+
+                       |   End     |
+                       +-----------+
+
+
+
+
+
+METRICS & INTERPRETATION
+Confusion Matrix
+         Predicted
+          0    1
+Actual 0 [TN | FP]
+       1 [FN | TP]
+
+
+TP (True Positive): Diabetic correctly predicted
+
+TN (True Negative): Non-diabetic correctly predicted
+
+FP (False Positive): Non-diabetic misclassified as diabetic
+
+FN (False Negative): Diabetic misclassified as non-diabetic
+
+Accuracy
+
+Measures how many predictions were correct.
+Accuracy = (TP + TN) / Total Samples
+
+Error Rate
+
+Proportion of incorrect predictions.
+Error Rate = 1 – Accuracy
+
+Precision
+
+Out of predicted diabetic cases, how many were correct?
+Precision = TP / (TP + FP)
+
+Recall (Sensitivity)
+
+Out of actual diabetic cases, how many were detected?
+Recall = TP / (TP + FN)
+
+F1 Score
+
+Harmonic mean of precision and recall.
+Useful when class distribution is imbalanced.
+F1 = 2 × (Precision × Recall) / (Precision + Recall)
+
+
+
+CONCLUSION
+
+K-Nearest Neighbors was successfully implemented to classify diabetes. After preprocessing and model training, KNN provided reasonable accuracy, precision, recall, and F1-score. The confusion matrix offers insight into classification strengths and weaknesses. Although simple, KNN is effective for smaller datasets but can struggle with high dimensionality or imbalanced data. This experiment demonstrates practical machine learning evaluation using real-world medical data.

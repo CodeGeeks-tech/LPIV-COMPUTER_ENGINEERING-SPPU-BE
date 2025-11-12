@@ -1,0 +1,181 @@
+✅ CODE EXPLANATION — Titanic Survival Prediction using Random Forest
+
+This program predicts whether a passenger survived the Titanic shipwreck using machine learning.
+The model uses Random Forest Classifier and evaluates accuracy, confusion matrix, and classification report.
+
+📌 1. Import Required Libraries
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+✔ Explanation:
+
+pandas / numpy → data handling
+
+train_test_split → split dataset
+
+LabelEncoder → convert categorical values to numeric
+
+RandomForestClassifier → ensemble machine learning model
+
+accuracy_score, confusion_matrix, classification_report → evaluation metrics
+
+📌 2. Load the Dataset
+df = pd.read_csv('tiatanic.xls')
+print(df.head())
+
+✔ Explanation:
+
+Loads the Titanic dataset (Excel file converted to CSV-like format).
+
+head() prints first 5 rows to understand structure.
+
+Typical dataset columns include:
+
+PassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked
+
+📌 3. Select Required Columns
+df = df[['Survived', 'Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
+
+✔ Explanation:
+
+We keep only relevant features:
+
+Survived → target variable
+
+Pclass, Sex, Age → important predictors
+
+SibSp, Parch → number of siblings/parents
+
+Fare, Embarked → socio-economic indicators
+
+📌 4. Handling Missing Values
+df['Age'].fillna(df['Age'].mean(), inplace=True)
+df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
+
+✔ Explanation:
+
+Age: missing values replaced with mean age
+
+Embarked: missing values replaced with the most common port
+
+This ensures the dataset has no NULL values.
+
+📌 5. Encode Categorical Features
+label = LabelEncoder()
+df['Sex'] = label.fit_transform(df['Sex'])
+df['Embarked'] = label.fit_transform(df['Embarked'])
+
+✔ Explanation:
+
+Machine learning models require numeric data, so:
+
+Sex:
+
+male → 1
+
+female → 0
+
+Embarked (C, Q, S) → converted to 0, 1, 2
+
+📌 6. Split Features and Target
+X = df.drop('Survived', axis=1)
+y = df['Survived']
+
+✔ Explanation:
+
+X → all input features
+
+y → output label (0 = died, 1 = survived)
+
+📌 7. Split into Train & Test Sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+✔ Explanation:
+
+75% training data
+
+25% testing data
+
+Random state ensures reproducibility
+
+📌 8. Build the Random Forest Model
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+✔ Explanation:
+
+Random Forest = multiple decision trees joined to improve accuracy
+
+n_estimators=100 → uses 100 trees
+
+Works very well for tabular datasets (like Titanic)
+
+📌 9. Train the Model
+model.fit(X_train, y_train)
+
+✔ Explanation:
+
+The model learns patterns from the training data.
+
+📌 10. Make Predictions
+y_pred = model.predict(X_test)
+
+✔ Explanation:
+
+Model predicts survival on test data.
+
+📌 11. Calculate Accuracy
+print(" Accuracy:", accuracy_score(y_test, y_pred))
+
+✔ Explanation:
+
+Accuracy = (Correct predictions / Total predictions)
+
+📌 12. Confusion Matrix
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+✔ Explanation:
+	Predicted Died	Predicted Survived
+Actual Died	TN	FP
+Actual Survived	FN	TP
+
+Shows correct + incorrect predictions.
+
+📌 13. Classification Report
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+✔ Explanation:
+
+Gives:
+
+Precision → how many predicted survivors actually survived
+
+Recall → how many actual survivors were correctly identified
+
+F1-score → balance of precision & recall
+
+🎯 FINAL SUMMARY — What This Code Does
+
+✔ Loads Titanic dataset
+✔ Selects important passenger features
+✔ Handles missing values
+✔ Converts categorical fields to numeric
+✔ Splits data into training and testing
+✔ Trains a Random Forest model
+✔ Predicts survival of passengers
+✔ Calculates:
+
+Accuracy
+
+Confusion Matrix
+
+Precision
+
+Recall
+
+F1-Score
+
+✔ Helps determine which kinds of passengers were more likely to survive

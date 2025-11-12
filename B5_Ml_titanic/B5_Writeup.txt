@@ -1,0 +1,100 @@
+Mini Project- Build a machine learning model that predicts the type of people who survived the Titanic shipwreck using passenger data (i.e. name, age, gender, socio-economic class, etc.).
+
+THEORY
+
+The Titanic dataset is one of the most widely used datasets for binary classification. The objective is to predict whether a passenger survived the Titanic shipwreck based on their personal details such as age, gender, socio-economic class (Pclass), siblings/spouses aboard (SibSp), parents/children aboard (Parch), ticket fare, and port of embarkation.
+
+This problem is well-suited for classification algorithms. In this project, a Random Forest Classifier is used. Random Forest is an ensemble learning technique that constructs multiple decision trees and aggregates their predictions. It handles missing values, captures non-linear relationships, and reduces overfitting through averaging.
+
+The dataset is preprocessed by filling missing values, encoding categorical variables, training the model, and evaluating its performance using accuracy, confusion matrix, and classification report.
+
+
+ALGORITHM
+Titanic Survival Prediction Algorithm
+
+Start
+
+Load Titanic dataset (tiatanic.xls)
+
+Select relevant features such as Pclass, Age, Sex, Fare, SibSp, Parch, Embarked
+
+Handle missing values:
+  • Fill Age with mean
+  • Fill Embarked with mode
+
+Convert categorical columns (Sex, Embarked) using Label Encoding
+
+Split data into training set (75%) and testing set (25%)
+
+Initialize the Random Forest Classifier with 100 trees
+
+Train the classifier on the training data
+
+Predict survival for test data
+
+Compute performance metrics:
+  • Accuracy
+  • Confusion Matrix
+  • Precision, Recall, F1-Score (from Classification Report)
+
+Display results
+
+End
+
+
+                   +----------------+
+                   |     Start      |
+                   +--------+-------+
+                            |
+                            v
+         +------------------+---------------------+
+         | Load Titanic dataset (tiatanic.xls)    |
+         +------------------+---------------------+
+                            |
+                            v
+  +-------------------------+------------------------------+
+  | Select important columns for ML modeling               |
+  +-------------------------+------------------------------+
+                            |
+                            v
+           +----------------+------------------------+
+           | Fill missing values (Age, Embarked)     |
+           +----------------+------------------------+
+                            |
+                            v
+         +------------------+---------------------------+
+         | Encode categorical data (Sex, Embarked)      |
+         +------------------+---------------------------+
+                            |
+                            v
+        +-------------------+----------------------------+
+        | Split dataset into train (75%) and test (25%)   |
+        +-------------------+----------------------------+
+                            |
+                            v
+        +-------------------+----------------------------+
+        | Train Random Forest Classifier (100 trees)      |
+        +-------------------+----------------------------+
+                            |
+                            v
+         +------------------+------------------------+
+         | Predict on Test data                      |
+         +------------------+------------------------+
+                            |
+                            v
+   +-------------------------+-------------------------------+
+   | Evaluate: Accuracy, Confusion Matrix, Classification    |
+   | Report                                                  |
+   +-------------------------+-------------------------------+
+                            |
+                            v
+                         +--+--+
+                         | End |
+                         +-----+
+
+
+
+
+CONCLUSION
+
+In this project, a machine learning model was built to predict Titanic passenger survival. After preprocessing the dataset, a Random Forest Classifier was trained and evaluated. The model delivered strong accuracy and meaningful insights into the factors influencing survival. Ensemble tree-based models like Random Forest are effective for datasets containing both numerical and categorical features, making them suitable for this problem.

@@ -1,0 +1,146 @@
+1. What is customer churn?
+
+Answer:
+Customer churn means a customer leaves or stops using the service. In this dataset, churn = 1 means the customer left.
+
+2. What is the target variable in the dataset?
+
+Answer:
+The Churn column (index 12), stored in Y.
+
+3. Why do we drop CustomerId and Surname?
+
+Answer:
+Because they do not contribute to prediction. They are identifiers, not meaningful features.
+
+4. Why is One-Hot Encoding used?
+
+Answer:
+To convert categorical variables (Gender, Geography) into numerical format that neural networks can understand.
+
+5. Why does OneHotEncoder(drop='first') drop the first category?
+
+Answer:
+To avoid dummy variable trap, preventing multicollinearity among encoded features.
+
+6. Why is StandardScaler used?
+
+Answer:
+To scale all features to the same range, improving ANN training stability and speed.
+
+7. What does the pipeline do?
+
+Answer:
+It combines preprocessing steps (encoding + scaling) into a single automated workflow.
+
+8. What is the input shape given to the first Dense layer?
+
+Answer:
+input_shape = (X_train.shape[1],)
+This equals the number of transformed features after encoding.
+
+9. What activation function is used in hidden layers?
+
+Answer:
+ReLU (Rectified Linear Unit) — commonly used for deep learning models.
+
+10. Why do we use Dropout?
+
+Answer:
+To prevent overfitting by randomly disabling neurons during training.
+
+11. What is the output activation function and why?
+
+Answer:
+Sigmoid, because this is a binary classification problem with output ∈ {0,1}.
+
+12. What loss function is used and why?
+
+Answer:
+binary_crossentropy — ideal for binary classification problems.
+
+13. What optimizer is used in the ANN?
+
+Answer:
+Adam, an efficient gradient-based optimizer.
+
+14. How many epochs are used for training?
+
+Answer:
+100 epochs.
+
+15. What does batch_size = 32 mean?
+
+Answer:
+Training is done in mini-batches of 32 samples at a time.
+
+16. What is validation_split = 0.1 used for?
+
+Answer:
+It reserves 10% of training data for validation, helping detect overfitting.
+
+17. What does classifier.predict(X_test) output?
+
+Answer:
+Probabilities between 0 and 1 representing the model’s confidence a customer will churn.
+
+18. Why do we convert predictions using (y_pred > 0.5)?
+
+Answer:
+To convert predicted probabilities into binary output (0 or 1).
+
+19. What does a confusion matrix tell us?
+
+Answer:
+It shows:
+
+True Positives
+
+True Negatives
+
+False Positives
+
+False Negatives
+
+Useful for evaluating classifier performance.
+
+20. How is accuracy calculated in the code?
+
+Answer:
+Accuracy = (TP + TN) / total test samples × 100%
+
+21. What is overfitting?
+
+Answer:
+When a model performs well on training data but poorly on test data because it memorized patterns.
+
+22. How does Dropout prevent overfitting?
+
+Answer:
+By randomly removing neurons during training, making the network more generalizable.
+
+23. Why is an ANN suitable for churn prediction?
+
+Answer:
+Because ANN can model:
+
+Non-linear relationships
+
+Multiple interacting features
+
+Complex decision boundaries
+
+24. What does the history object store?
+
+Answer:
+Training and validation:
+
+Accuracy
+
+Loss
+Over the 100 epochs.
+
+25. What is the expected output of the model?
+
+Answer:
+Whether a customer will leave (1) or stay (0) in the next 6 months.

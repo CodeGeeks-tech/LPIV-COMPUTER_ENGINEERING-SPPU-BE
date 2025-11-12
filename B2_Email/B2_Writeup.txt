@@ -1,0 +1,125 @@
+B(2) Classify the email using the binary classification method. Email Spam detection has two states: a) Normal State – Not Spam, b) Abnormal State – Spam. Use K-Nearest Neighbors and Support Vector Machine for classification. Analyze their performance. 
+
+THEORY
+
+Email spam detection is a binary classification problem where emails are labeled as either Normal (Not Spam) or Abnormal (Spam). Machine learning algorithms can be trained on past email datasets to learn patterns such as word frequencies or meta-features. Two commonly used classification models are:
+
+K-Nearest Neighbors (KNN)
+
+Instance-based, lazy learning algorithm
+
+Classifies a new email based on the majority class of its K nearest neighbors
+
+Sensitive to noise and high-dimensional data
+
+Support Vector Machine (SVM)
+
+Finds an optimal hyperplane that maximizes margin between the two classes
+
+Works well with high-dimensional sparse data (like email word vectors)
+
+RBF kernel used for non-linear classification
+
+The dataset "emails.csv" contains thousands of word-frequency features along with a binary spam label. The goal is to train both KNN and SVM and compare their accuracy, confusion matrix, and classification metrics.
+
+
+
+ALGORITHM
+1. Data Preprocessing
+
+Load email dataset
+
+Extract word-frequency features as X
+
+Extract label (0 = not spam, 1 = spam) as Y
+
+Split data into training and testing sets
+
+2. K-Nearest Neighbors (KNN) Classification
+
+Choose value of K (here K = 7)
+
+For each test email:
+  • Compute distance from training points
+  • Select K nearest neighbors
+  • Predict class based on majority vote
+
+Evaluate accuracy and confusion matrix
+
+3. Support Vector Machine (SVM) Classification
+
+Use SVM with RBF kernel
+
+Fit model with training features
+
+Predict labels for test data
+
+Evaluate accuracy, precision, recall, F1-score
+
+4. Performance Comparison
+
+Compare SVM vs. KNN accuracy
+
+Compare confusion matrices
+
+Identify which classifier detects spam more accurately
+
+
+
+
+                  +----------------+
+                  |     Start      |
+                  +--------+-------+
+                           |
+                           v
+         +-----------------+----------------+
+         | Load emails.csv dataset          |
+         +-----------------+----------------+
+                           |
+                           v
+           +---------------+----------------+
+           | Preprocess data (check nulls)  |
+           +---------------+----------------+
+                           |
+                           v
+    +----------------------+------------------------+
+    | Split dataset into training and testing sets |
+    +----------------------+------------------------+
+                           |
+                           v
+           +---------------+----------------+
+           | Train SVM model                |
+           +---------------+----------------+
+                           |
+                           v
+         +-----------------+------------------+
+         | Train KNN model (k = 7)            |
+         +-----------------+------------------+
+                           |
+                           v
+       +-------------------+----------------------+
+       | Predict labels using both SVM and KNN    |
+       +-------------------+----------------------+
+                           |
+                           v
+      +--------------------+----------------------+
+      | Evaluate: accuracy, confusion matrix,     |
+      | precision, recall, F1-score              |
+      +--------------------+----------------------+
+                           |
+                           v
+               +-----------+-----------+
+               | Compare Performance   |
+               +-----------+-----------+
+                           |
+                           v
+                         +---+
+                         |End|
+                         +---+
+
+
+CONCLUSION
+
+Email spam classification using machine learning is an effective approach for detecting unwanted emails. The experiment demonstrates that Support Vector Machine significantly outperforms KNN for high-dimensional datasets such as word-frequency email features. SVM offers higher accuracy, better robustness to noise, and a more reliable decision boundary. KNN, while simpler, struggles with dimensionality and tends to produce lower accuracy. This experiment clearly shows why SVM is widely preferred in text classification tasks.
+
+
