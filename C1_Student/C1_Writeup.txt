@@ -1,0 +1,94 @@
+C(1) Write a program in solidity to create Student data. Use the following constructs: 
+
+• Structures
+ • Arrays
+ • Fallback 
+Deploy this as smart contract on Ethereal and Observe the transaction fee and Gas values.
+
+
+THEORY
+
+Solidity is a contract-oriented programming language used to develop smart contracts on Ethereum. This program stores student data using structures and dynamic arrays, allowing addition and retrieval of student records. A fallback function is used to handle unexpected Ether transfers or wrong function calls. When deployed on Ethereum, every operation consumes gas, which represents computational cost. Gas usage varies depending on operations like storage, loops, and array resizing.
+
+ALGORITHM
+Algorithm for Student Smart Contract
+
+Start
+
+Define a Student structure with:
+  • name
+  • roll number
+
+Create a dynamic array studentArr to store multiple students
+
+Create addStudent() to:
+  • Check for duplicate roll numbers
+  • If unique, push a new student into array
+
+Create displayAllStudents() to return all stored students
+
+Create getStudentByIndex() to fetch a student by index
+
+Create getLengthOfStudents() to return number of students
+
+Add fallback() function to handle unexpected calls
+
+Deploy contract on Remix / Ethereum testnet
+
+Observe gas fees for deployment and function execution
+
+End
+
+
+
+
+                +----------------+
+                |     Start      |
+                +--------+-------+
+                         |
+                         v
+         +---------------+----------------+
+         | Define struct Student(name,roll)|
+         +---------------+----------------+
+                         |
+                         v
+            +------------+-------------------+
+            | Declare dynamic array studentArr|
+            +------------+-------------------+
+                         |
+                         v
+   +---------------------+-------------------------+
+   | addStudent(): check duplicates, then push     |
+   +---------------------+-------------------------+
+                         |
+                         v
+        +----------------+-----------------------+
+        | displayAllStudents(): return array     |
+        +----------------+-----------------------+
+                         |
+                         v
+     +-------------------+-------------------------+
+     | getStudentByIndex(): require index valid   |
+     +-------------------+-------------------------+
+                         |
+                         v
+       +-----------------+------------------------+
+       | fallback(): handle wrong calls, revert  |
+       +-----------------+------------------------+
+                         |
+                         v
+             +-----------+----------+
+             | Deploy & Observe Gas |
+             +-----------+----------+
+                         |
+                         v
+                       +---+
+                       |End|
+                       +---+
+
+
+
+
+CONCLUSION
+
+The student smart contract demonstrates the use of structures, dynamic arrays, and the fallback function in Solidity. Deploying it on Ethereum shows how gas is consumed for operations, especially storage-related ones. The fallback function ensures robustness against incorrect interactions. This mini-project provides hands-on understanding of smart contract deployment, gas estimation, and blockchain data management.

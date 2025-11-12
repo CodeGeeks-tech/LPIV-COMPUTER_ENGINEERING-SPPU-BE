@@ -1,0 +1,207 @@
+✅ SECTION 1 — 25 Q&A for C(1): Solidity Program for Student Data (Structures, Arrays, Fallback)
+
+Based fully on the given Solidity code + related concepts + blockchain fundamentals.
+
+1. What is Solidity?
+
+Solidity is a contract-oriented programming language used to develop smart contracts on Ethereum and other EVM-compatible blockchains.
+
+2. What does the pragma solidity ^0.8.0 line mean?
+
+It specifies the compiler version, allowing versions 0.8.0 and above but not below.
+
+3. What Solidity construct is used to represent a student?
+
+A struct (Student) containing name and rollno.
+
+4. Why do we use a dynamic array in this program?
+
+To store multiple students of unknown size:
+
+Student[] public studentArr;
+
+5. What is the purpose of the addStudent() function?
+
+To add a new student while ensuring no duplicate roll numbers exist.
+
+6. What does the revert() statement do?
+
+It stops execution and reverts the transaction, refunding unused gas.
+
+7. Why do we check roll number before adding a student?
+
+To prevent duplicates and maintain data integrity.
+
+8. What is the visibility of displayAllStudents()?
+
+view – It reads blockchain state without modifying it.
+
+9. What does returns(Student[] memory) indicate?
+
+The function returns an array of students stored in memory, not storage.
+
+10. What mistake exists in getStudentByIndex()?
+
+The condition
+
+index < studentArr.length || index > studentArr.length
+
+
+is wrong. It should be:
+
+require(index < studentArr.length, "Index out of bound");
+
+11. What does the fallback function do in Solidity?
+
+A fallback function handles:
+
+Direct Ether transfers with no function call
+
+Calls to undefined functions
+
+(Your code currently lacks fallback; should be added.)
+
+12. Why might we include a fallback function in this contract?
+
+To prevent accidental Ether transfers or handle unexpected function calls gracefully.
+
+13. Is this contract payable?
+
+No, it does not accept Ether because no function is marked payable.
+
+14. Where is student data stored?
+
+Permanently on blockchain storage, inside the studentArr array.
+
+15. Does the contract support deletion of students?
+
+No, only insertion and retrieval exist.
+
+16. What is gas in Ethereum?
+
+Gas is the fee required to execute operations on the blockchain.
+
+17. Which function costs the most gas?
+
+addStudent() because it:
+
+Iterates through the array
+
+Modifies blockchain storage (most expensive operation)
+
+18. Which functions are gas-free?
+
+view functions executed off-chain:
+
+displayAllStudents()
+
+getStudentByIndex()
+
+getLengthOfStudents()
+
+19. What happens if two students have the same name?
+
+Allowed. Only roll number must be unique.
+
+20. Why do we use public visibility on the array?
+
+So Solidity automatically creates a getter function.
+
+21. On deployment, how much gas does the constructor consume?
+
+Minimal, because no data storage or complex logic is executed.
+
+22. Does this contract follow mappings or arrays? Why?
+
+It uses arrays, but mappings would be more efficient for checking duplicates.
+
+23. What is the type of rollno?
+
+uint → unsigned integer (256-bit by default).
+
+24. Can this contract be upgraded after deployment?
+
+No, Solidity contracts are immutable unless a proxy pattern is used.
+
+25. Can this contract store unlimited students?
+
+Yes, but gas costs increase as the array grows.
+
+✅ SECTION 2 — Additional Solidity Programming Questions (General Viva Questions)
+🔥 Basic Solidity Questions
+
+What is a smart contract?
+A self-executing program stored on the blockchain.
+
+Difference between memory and storage?
+
+memory → temporary RAM
+
+storage → permanent blockchain storage
+
+What is msg.sender?
+The address that called the contract.
+
+What is msg.value?
+Amount of Ether sent with a transaction.
+
+What does payable mean?
+A function can receive Ether.
+
+Difference between view and pure?
+
+view → reads state
+
+pure → reads neither state nor blockchain variables
+
+What is a constructor?
+Function that runs only once at deployment.
+
+Why are mappings used?
+Fast O(1) key-value storage.
+
+Why is blockchain immutable?
+Data cannot be changed after writing.
+
+What is an event?
+Used to log information for off-chain applications.
+
+🔥 Intermediate Solidity Questions
+
+What is gas limit?
+Maximum amount of gas the sender is willing to spend.
+
+What is block.timestamp?
+Timestamp of the current block.
+
+What is a modifier?
+A reusable condition like onlyOwner.
+
+What is inheritance?
+Solidity supports contract inheritance using is.
+
+Difference between external and public?
+
+external: cannot be used internally without this.
+
+public: callable internally and externally.
+
+🔥 Advanced Solidity Questions
+
+What is re-entrancy attack?
+When a malicious contract repeatedly calls back before the function completes.
+
+How do you prevent re-entrancy?
+Use Checks-Effects-Interactions pattern or ReentrancyGuard.
+
+What is ABI?
+Application Binary Interface — blueprint for interacting with contracts.
+
+What is the EVM?
+Ethereum Virtual Machine; executes contract bytecode.
+
+What is the difference between fallback and receive?
+
+receive() → handles plain Ether transfers
+
+fallback() → handles unknown function calls or data

@@ -1,0 +1,202 @@
+✅ SECTION 1 — 25 Q&A for C(2): Bank Smart Contract (Deposit, Withdraw, Show Balance)
+
+These cover:
+
+✔ Solidity basics
+✔ Payable functions
+✔ Ether transfers
+✔ Gas concepts
+✔ Your code logic
+✔ Common mistakes
+✔ Blockchain/viva concepts
+
+1. What is the purpose of this smart contract?
+
+To simulate a bank account on the Ethereum blockchain with operations:
+
+Deposit
+
+Withdraw
+
+Show Balance
+
+2. Who becomes the account owner?
+
+The wallet that deploys the contract:
+
+accOwner = msg.sender;
+
+3. Why are deposit and withdraw functions marked as payable?
+
+Because these functions handle Ether transactions.
+payable allows the function to receive Ether.
+
+4. What does msg.value represent?
+
+The amount of Ether sent along with the transaction.
+
+5. Why is the require statement used in deposit?
+
+To ensure only the account owner can deposit money:
+
+require(accOwner == msg.sender);
+
+6. Why must msg.value > 0 in deposit?
+
+To prevent zero-value deposits and waste of gas.
+
+7. What is the error in the Withdraw function?
+
+This condition is wrong:
+
+require(msg.value > balance);
+
+
+Should be:
+
+require(amount <= balance);
+
+8. Why is balance stored as a state variable?
+
+Because Ether balance must persist across transactions and resets.
+
+9. What is the visibility of showBalance()?
+
+view — it reads state but does not modify it.
+
+10. Who can withdraw money?
+
+Only the account owner.
+
+11. What happens if someone else tries to withdraw?
+
+The transaction reverts with the message:
+“You are not an account owner”.
+
+12. Why is withdrawal not sending Ether back to the user?
+
+Because the function reduces only the internal variable balance.
+Actual transfer is missing (payable(msg.sender).transfer(amount) is needed).
+
+13. What is gas?
+
+The fee required to execute smart contract code on Ethereum.
+
+14. Which operation consumes the most gas?
+
+Withdrawal or deposit, because they modify blockchain storage.
+
+15. Are read-only functions charged gas?
+
+No—view functions called externally are gas-free.
+
+16. What happens if withdraw amount is greater than the saved balance?
+
+The transaction is reverted due to the require condition.
+
+17. What happens if someone sends Ether directly to the contract?
+
+The contract lacks a fallback/receive function → the transaction fails.
+
+18. What does payable keyword allow?
+
+Enables receiving Ether during function calls.
+
+19. Why should withdraw use call() instead of transfer()?
+
+Because transfer() is limited to 2300 gas and may fail in modern EVM rules.
+
+20. Why is msg.sender important?
+
+It identifies the caller's address—essential for permissions.
+
+21. Can this contract hold Ether securely?
+
+Yes, but withdrawal logic must be corrected for real-world deployment.
+
+22. What is a security issue in this contract?
+
+It does not check for re-entrancy (though simple subtraction prevents loops).
+
+23. Is this contract upgradeable?
+
+No. Once deployed, Solidity contracts are immutable.
+
+24. Where is the Ether actually stored?
+
+In the contract’s Ethereum address balance, not in the variable.
+
+25. Does this contract send Ether back during withdrawal?
+
+No, the contract only decreases balance. It must add payable(msg.sender).transfer(amount).
+
+✅ SECTION 2 — Additional Solidity Programming Viva Questions
+
+These are general blockchain/solidity questions similar to your C(1) request.
+
+🔥 Basic Solidity Questions
+1. What is a smart contract?
+
+A self-executing contract with rules written in code stored on Ethereum.
+
+2. What is msg.sender?
+
+Address of the caller of the current function.
+
+3. What is msg.value?
+
+Amount of Ether sent with the call.
+
+4. What is payable?
+
+A function that can receive Ether.
+
+5. What is the difference between call() vs transfer()?
+
+transfer() → limited gas, safer but restrictive
+
+call() → flexible, recommended for sending Ether
+
+🔥 Intermediate Questions
+6. What is the fallback function?
+
+Executes when no function matches the call.
+
+7. What is receive()?
+
+Executes on plain Ether transfers with empty calldata.
+
+8. Why use require()?
+
+To validate inputs and protect logic.
+
+9. What is a state variable?
+
+Stored permanently on blockchain.
+
+10. What is an event?
+
+Used to log data for off-chain applications.
+
+🔥 Advanced Questions
+11. What is re-entrancy?
+
+An attack where a function calls back repeatedly before completing.
+
+12. How to prevent re-entrancy?
+
+Use Checks → Effects → Interactions pattern.
+
+13. What is ABI?
+
+Defines how external apps communicate with the smart contract.
+
+14. What is storage vs memory?
+
+storage → permanent
+
+memory → temporary RAM
+
+15. What is a gas limit?
+
+Maximum gas allowed for a transaction.

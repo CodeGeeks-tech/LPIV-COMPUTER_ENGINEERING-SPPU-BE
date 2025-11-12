@@ -1,0 +1,108 @@
+C(2) Write a smart contract on a test network, for Bank account of a customer for following 
+operations: 
+• Deposit money 
+• Withdraw Money 
+• Show balance
+
+
+
+THEORY
+
+A smart contract on Ethereum can simulate a simple banking system, where transactions such as deposits and withdrawals are recorded securely on the blockchain. This banking contract uses Ethereum’s native currency (Ether) for storing balances and ensures that only the account owner can perform operations. The payable keyword allows the contract to receive Ether, while state variables store balances. When deployed on a test network (Goerli, Sepolia, etc.), each function consumes gas, representing computational cost. The contract demonstrates secure financial transactions using Solidity’s built-in features like msg.sender, msg.value, modifiers, and state management.
+
+ALGORITHM
+Bank Account Smart Contract Algorithm
+
+Start
+
+Set the contract deployer as the account owner
+
+Initialize customer balance to 0
+
+Deposit Function
+  • Ensure the caller is the account owner
+  • Ensure deposited value > 0
+  • Add msg.value to balance
+
+Withdraw Function
+  • Ensure caller is account owner
+  • Ensure requested amount ≤ balance
+  • Deduct amount from balance
+  • Transfer Ether back to caller (if implemented)
+
+Show Balance Function
+  • Ensure caller is owner
+  • Return current balance
+
+Deploy on a test network and observe gas usage
+
+End
+
+
+
+
+                    +----------------+
+                    |     Start      |
+                    +--------+-------+
+                             |
+                             v
+             +---------------+----------------+
+             | Set owner = msg.sender         |
+             +---------------+----------------+
+                             |
+                             v
+              +--------------+--------------+
+              |  Deposit Function Called?   |
+              +--------------+--------------+
+                             |
+                             v
+          +------------------+---------------------+
+          | Check: sender == owner?               |
+          +-----------+------------+--------------+
+                      |Yes         |No
+                      v            v
+       +--------------+--+    +---------------+
+       | Add msg.value |    | Reject Transaction |
+       +----------------+    +---------------+
+                             |
+                             v
+              +--------------+--------------+
+              | Withdraw Function Called?   |
+              +--------------+--------------+
+                             |
+                             v
+        +--------------------+---------------------+
+        | Check: sender == owner ?                 |
+        +-----------+------------+-----------------+
+                    |Yes         |No
+                    v            v
+        +-----------+-----------+   +--------------+
+        | Check amount <= bal? |   | Reject Tx    |
+        +---------+-------------+   +--------------+
+                  |Yes
+                  v
+       +----------+----------------+
+       | balance = balance - amt   |
+       | transfer Ether to owner   |
+       +----------+----------------+
+                             |
+                             v
+             +---------------+---------------+
+             | showBalance Function Called?  |
+             +---------------+---------------+
+                             |
+                             v
+             +---------------+--------------+
+             | Return current balance        |
+             +---------------+--------------+
+                             |
+                             v
+                           +---+
+                           |End|
+                           +---+
+
+
+
+CONCLUSION
+
+This smart contract demonstrates essential banking operations on the Ethereum blockchain. Using Solidity constructs such as payable, msg.sender, and state variables, the contract securely handles deposits, withdrawals, and balance checking. Deployment on a test network reveals the gas costs associated with different operations, offering insight into blockchain transaction economics. The project provides foundational understanding of decentralized financial applications and Ethereum smart contract behavior.
