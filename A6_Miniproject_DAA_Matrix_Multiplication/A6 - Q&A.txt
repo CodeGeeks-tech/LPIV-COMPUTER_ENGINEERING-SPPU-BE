@@ -1,0 +1,133 @@
+1. What is matrix multiplication?
+
+Answer:
+Matrix multiplication is a binary operation where the element at position (i, j) in the result matrix is computed as the dot product of the i-th row of Matrix A and the j-th column of Matrix B.
+
+2. What is the condition for matrix multiplication to be possible?
+
+Answer:
+The number of columns in Matrix A must equal the number of rows in Matrix B.
+
+3. What does the sequential_multiply() function do?
+
+Answer:
+It performs standard matrix multiplication using three nested loops without any parallelization.
+
+4. What is multithreading?
+
+Answer:
+Multithreading allows multiple parts of a program (threads) to run concurrently, improving performance on multi-core processors.
+
+5. What does “thread per row” mean in matrix multiplication?
+
+Answer:
+Each thread computes one complete row of the resulting matrix.
+
+6. What does “thread per cell” mean?
+
+Answer:
+Each thread computes one single element (i, j) of the result matrix.
+
+7. Which multithreading approach is more efficient?
+
+Answer:
+Thread per row, because thread creation overhead is lower compared to creating a thread for every single cell.
+
+8. Why is “thread per cell” slower for large matrices?
+
+Answer:
+Because it creates too many threads (m × n threads), causing context switching overhead.
+
+9. Why do we use threading.Thread in Python?
+
+Answer:
+To parallelize independent tasks and improve speed when tasks are I/O or switching bound.
+
+10. Does Python multithreading always improve speed?
+
+Answer:
+Not always. Due to the Global Interpreter Lock (GIL), only one thread runs Python bytecode at a time, limiting speedup in CPU-bound tasks.
+
+11. Why does multithreading still help here?
+
+Answer:
+Because matrix multiplication releases the GIL during heavy numeric operations, allowing partial concurrency.
+
+12. What does the start() method do in threads?
+
+Answer:
+It launches the thread and begins execution of the assigned target function.
+
+13. What does join() do?
+
+Answer:
+It blocks the main thread until the child thread finishes execution.
+
+14. What is the time complexity of sequential matrix multiplication?
+
+Answer:
+O(n³), due to three nested loops.
+
+15. What is the theoretical time improvement with threads?
+
+Answer:
+For p threads:
+Speedup ≈ n³ / (n³ / p) = p× faster
+(But Python overhead reduces actual speedup.)
+
+16. What type of matrices did your code generate in random mode?
+
+Answer:
+Square matrices (NxN) filled with random floating-point values.
+
+17. Why do we check if len(a[0]) != len(b):?
+
+Answer:
+To ensure matrices are compatible before multiplying them.
+
+18. What does the print_matrix() function do?
+
+Answer:
+It prints the result matrix with values rounded to two decimal places.
+
+19. Why is thread_per_cell used only when matrix size ≤ 100 elements?
+
+Answer:
+To avoid creating too many threads, which would drastically slow down execution.
+
+20. How is performance measured in the code?
+
+Answer:
+Using the time.time() function before and after multiplication.
+
+21. What is “speedup”?
+
+Answer:
+Speedup = Sequential time / Threaded time
+Higher speedup means better performance gain.
+
+22. When will thread_per_row outperform sequential multiplication?
+
+Answer:
+For large matrices with enough CPU cores available.
+
+23. Why does sequential multiplication sometimes perform faster?
+
+Answer:
+Because it avoids thread creation overhead.
+
+24. What happens if user inputs 1 for manual input?
+
+Answer:
+The program asks for row and column sizes for both matrices and multiplies them based on user input.
+
+25. What is the output for the sample input given (2×2 matrices)?
+
+Answer:
+The result matrix is:
+
+[19.0, 22.0]
+[43.0, 50.0]
+
+
+Which matches the correct matrix multiplication outcome.

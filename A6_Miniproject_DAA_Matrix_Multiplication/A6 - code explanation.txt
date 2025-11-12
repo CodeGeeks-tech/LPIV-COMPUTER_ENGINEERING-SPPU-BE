@@ -1,0 +1,168 @@
+✅ CODE EXPLANATION – Sequential & Multithreaded Matrix Multiplication
+
+This program performs matrix multiplication in three ways:
+
+Sequential multiplication (normal method)
+
+Multithreading: One thread per row
+
+Multithreading: One thread per cell
+
+It then measures performance, compares the execution time, and optionally displays the result matrix.
+
+📌 1. sequential_multiply(a, b)
+
+Performs standard matrix multiplication.
+
+def sequential_multiply(a, b):
+    rows_a, cols_a, cols_b = len(a), len(a[0]), len(b[0])
+    result = [[0] * cols_b for _ in range(rows_a)]
+
+✔ Explanation
+
+a is of size (rows_a × cols_a)
+
+b is of size (cols_a × cols_b)
+
+Output matrix is (rows_a × cols_b)
+
+✔ Triple nested loop (Standard Matrix Multiplication)
+for i in range(rows_a):
+    for j in range(cols_b):
+        for k in range(cols_a):
+            result[i][j] += a[i][k] * b[k][j]
+
+
+Multiplies row from a with column from b.
+
+Accumulates the dot product.
+
+📌 2. thread_per_row(a, b)
+
+Creates one thread per row.
+
+def thread_per_row(a, b):
+    rows_a, cols_a, cols_b = len(a), len(a[0]), len(b[0])
+    result = [[0] * cols_b for _ in range(rows_a)]
+
+✔ Inner function for each row
+def compute_row(row):
+    for j in range(cols_b):
+        for k in range(cols_a):
+            result[row][j] += a[row][k] * b[k][j]
+
+
+Each thread computes one entire row of the result matrix.
+
+✔ Creating & starting threads
+threads = [threading.Thread(target=compute_row, args=(i,)) for i in range(rows_a)]
+for t in threads:
+    t.start()
+for t in threads:
+    t.join()
+
+
+Starts threads to compute rows in parallel.
+
+join() waits for all threads to finish.
+
+👉 Advantages:
+
+Only rows_a threads → efficient, less overhead.
+
+📌 3. thread_per_cell(a, b)
+
+Creates one thread per cell in the output matrix.
+
+def thread_per_cell(a, b):
+    result = [[0] * cols_b for _ in range(rows_a)]
+
+✔ Inner function to compute one result cell (i, j)
+def compute_cell(row, col):
+    for k in range(cols_a):
+        result[row][col] += a[row][k] * b[k][col]
+
+✔ Creating many threads (rows × columns)
+threads = [threading.Thread(target=compute_cell, args=(i, j))
+           for i in range(rows_a) for j in range(cols_b)]
+
+
+If matrix = 10×10 → 100 threads
+
+If matrix = 50×50 → 2500 threads (too many → slow)
+
+👉 Why used only for small matrices?
+
+Too many threads create overhead → performance decreases.
+
+📌 4. Input Functions
+✔ Taking matrix from user
+def input_matrix():
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+
+✔ Printing matrix neatly
+def print_matrix(matrix):
+    for row in matrix:
+        print([round(val, 2) for val in row])
+
+📌 5. Main Logic
+✔ Choosing input method:
+
+Manual input
+
+Random NxN matrix
+
+choice = input("Enter choice (1 or 2): ")
+
+✔ Compatibility check
+if len(a[0]) != len(b):
+    print("Error: Matrix dimensions incompatible!")
+
+📌 6. Performance Measurement
+✔ Sequential Version
+start = time.time()
+r1 = sequential_multiply(a, b)
+t1 = time.time() - start
+
+✔ Thread-per-row Version
+start = time.time()
+r2 = thread_per_row(a, b)
+t2 = time.time() - start
+
+✔ Thread-per-cell Version (only for small matrices)
+if len(a) * len(b[0]) <= 100:
+    r3 = thread_per_cell(a, b)
+
+📌 7. Display Performance
+Sequential:      0.0001s
+Thread per row:  0.0003s
+Thread per cell: 0.0005s
+
+✔ Speedup Calculation
+Speedup = sequential_time / threaded_time
+
+📌 8. Output Matrix
+
+For small matrices (≤10×10), it prints:
+
+[19.0, 22.0]
+[43.0, 50.0]
+
+⭐ Concepts Examiner May Ask
+🔸 Why multithreading?
+
+To perform independent calculations in parallel.
+
+🔸 Why one thread per cell is slower?
+
+Too many threads → context switching overhead.
+
+🔸 Time complexities:
+Method	Time Complexity
+Sequential	O(n³)
+Thread per row	O(n³ / n) = O(n²) theoretically
+Thread per cell	O(n³ / n²) = O(n) theoretically but in practice slower due to overhead
+🔸 Why join()?
+
+Ensures all threads complete before accessing results.

@@ -1,0 +1,175 @@
+Write a program to implement matrix multiplication. Also implement multithreaded matrix multiplication with either one thread per row or one thread per cell. Analyze and compare their performance.
+
+THEORY
+
+Matrix multiplication is a fundamental operation in linear algebra, used in graphics, scientific computing, machine learning, and simulations. The operation multiplies two matrices A (m×n) and B (n×p) to produce a matrix C (m×p). Traditionally, matrix multiplication is implemented sequentially using three nested loops.
+
+To speed up computation, multithreading can be used. In this project, two multithreading strategies are implemented:
+
+Thread per Row – Each thread computes one full row of the result matrix.
+
+Thread per Cell – Each thread computes one individual cell of the matrix.
+
+Multithreading can improve performance, especially on multi-core CPUs, but too many threads create overhead. Thread-per-cell may be slower for large matrices due to excessive thread creation. This experiment compares sequential and parallel performance.
+
+ALGORITHM
+1. Sequential Matrix Multiplication
+
+Start
+
+Input matrices A and B
+
+Initialize result matrix C
+
+For each row i of A
+  • For each column j of B
+    – For each k
+      C[i][j] += A[i][k] × B[k][j]
+
+Output result matrix
+
+End
+
+Time Complexity: O(n³)
+Space Complexity: O(n²)
+
+      +----------------+
+      |     Start      |
+      +--------+-------+
+               |
+               v
+  +------------+-----------------+
+  | Input matrices A and B       |
+  +------------+-----------------+
+               |
+               v
+  +------------+-----------------+
+  | Initialize result matrix C    |
+  +------------+-----------------+
+               |
+               v
+  +------------+--------------------------+
+  | For each i, j, k compute C[i][j]     |
+  +------------+--------------------------+
+               |
+               v
+  +------------+-----------------+
+  | Print result matrix          |
+  +------------+-----------------+
+               |
+               v
+            +--+--+
+            | End |
+            +-----+
+
+
+2. Multithreaded – One Thread Per Row
+
+Start
+
+Create result matrix
+
+For each row i:
+  • Start a thread to compute entire row i
+
+Each thread computes:
+  C[i][j] = Σ A[i][k] × B[k][j]
+
+Join all threads
+
+Output result
+
+End
+
+Time Complexity: ~O(n³ / p)** (p = number of CPU cores)
+Space Complexity: O(n²)
+
+
+          +----------------+
+          |     Start      |
+          +--------+-------+
+                   |
+                   v
+   +---------------+----------------+
+   | Create empty result matrix C   |
+   +---------------+----------------+
+                   |
+                   v
+   +---------------+----------------+
+   | For each row i: start thread   |
+   | to compute entire row          |
+   +---------------+----------------+
+                   |
+                   v
+        +----------+-----------+
+        | Wait for all threads |
+        +----------+-----------+
+                   |
+                   v
+       +-----------+------------+
+       | Print result matrix    |
+       +-----------+------------+
+                   |
+                   v
+                 +---+
+                 |End|
+                 +---+
+
+
+
+3. Multithreaded – One Thread Per Cell
+
+Start
+
+For every cell (i, j) in result matrix:
+  • Start a thread to compute that single cell
+
+Each thread computes:
+  C[i][j] = Σ A[i][k] × B[k][j]
+
+Join all threads
+
+Output result
+
+End
+
+Time Complexity: High overhead due to too many threads
+Space Complexity: O(n²) + thread overhead
+
+           +----------------+
+           |     Start      |
+           +--------+-------+
+                    |
+                    v
+      +-------------+----------------------+
+      | For each cell (i,j): create thread |
+      +-------------+----------------------+
+                    |
+                    v
+   +----------------+---------------------------+
+   | Each thread computes C[i][j] independently |
+   +----------------+---------------------------+
+                    |
+                    v
+           +--------+---------+
+           | Join all threads |
+           +--------+---------+
+                    |
+                    v
+        +-----------+-----------+
+        | Print result matrix   |
+        +-----------+-----------+
+                    |
+                    v
+                  +---+
+                  |End|
+                  +---+
+
+
+CONCLUSION
+
+Matrix multiplication is a computationally expensive operation with O(n³) time complexity. Using multithreading can significantly improve performance, especially on large matrices and multi-core CPUs. The “thread per row” approach provides a good balance between parallelism and overhead. The “thread per cell” method creates excessive threads, making it impractical for large matrices but educational for understanding fine-grained parallelism. Overall, multithreaded matrix multiplication demonstrates clear performance gains compared to sequential execution.
+
+
+
+
