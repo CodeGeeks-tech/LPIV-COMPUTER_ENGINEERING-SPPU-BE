@@ -1,0 +1,41 @@
+Introduction
+The 0/1 Knapsack problem is a classic optimization problem where we must select a subset of items such that the total value is maximized without exceeding a given weight capacity. Each item can either be chosen entirely (1) or not chosen at all (0), making this a binary decision problem. This experiment implements the solution using Dynamic Programming (DP) or Branch and Bound (B&B), two of the most widely used strategies in algorithm design for solving NP-hard problems more efficiently than brute force.
+
+Problem Definition
+Given n items, each with a value and weight, the goal is to choose items so that their total weight does not exceed the knapsack capacity W and the total value is maximized. Unlike the Fractional Knapsack problem, items cannot be divided. This constraint makes the 0/1 Knapsack significantly more complex and computationally expensive to solve optimally.
+
+Dynamic Programming Approach
+Dynamic Programming solves the 0/1 Knapsack problem by breaking it into smaller subproblems and storing intermediate results to avoid repeated calculations. A 2D DP table is constructed where DP[i][w] represents the maximum value attainable using the first i items with weight limit w. The algorithm iterates through items, deciding whether to include or exclude each one based on which choice yields higher value. DP ensures optimal results with drastically reduced computation compared to brute force.
+
+DP Time and Space Complexity
+The dynamic programming solution has a time complexity of O(n × W), where n is the number of items and W is the weight capacity. Although polynomial, the algorithm can become slow when W is large. Its space complexity is also O(n × W) due to the DP table. Despite these constraints, DP is one of the most efficient exact methods for solving moderate-sized knapsack problems.
+
+Branch and Bound Approach
+Branch and Bound solves the 0/1 Knapsack problem by systematically exploring decision branches (include item or exclude item) and pruning branches that cannot lead to better solutions. It uses a bounding function to estimate the upper bound of profit attainable from a node, allowing the algorithm to skip unnecessary branches. This significantly reduces the search space compared to brute-force enumeration.
+
+Node Structure in Branch and Bound
+Each node in the B&B solution represents a state containing the level (item index), current profit, current weight, and upper bound. A queue is used for a breadth-first search (BFS) traversal of nodes. The upper bound is calculated by greedily adding remaining items based on value-to-weight ratio, similar to fractional knapsack logic. Only nodes with a bound greater than the current max profit are expanded, making B&B efficient.
+
+Bounding Function
+The bounding function estimates the maximum possible value achievable from a node by filling the knapsack with remaining items in descending order of value/weight ratio. If this bound is less than the current maximum profit, the node is pruned. This prevents exploring hopeless branches and significantly improves performance.
+
+Comparison Between DP and Branch & Bound
+Dynamic Programming guarantees optimal solutions in pseudo-polynomial time and is preferred when W is moderate. Branch & Bound can be faster when the bounding function prunes many branches, but in the worst case it still behaves exponentially. DP uses more memory, while B&B uses less but may take longer depending on the dataset. Both methods are exact algorithms for 0/1 Knapsack.
+
+Input Handling
+The program takes item values, item weights, and total capacity as input. For DP (recursive version), decisions are made item by item using recursion, while B&B uses a node-based search. Proper input validation ensures weights and values are measured correctly, and the capacity constraint is enforced.
+
+Correctness of Solution
+Both DP and B&B approaches always return the maximum possible achievable value. Dynamic programming ensures correctness through table-based state transitions, and B&B ensures correctness by exploring all feasible branches while pruning suboptimal ones. Both provide optimality guarantees.
+
+Use of Recursion in DP Version
+The recursive DP solution explores both possibilities—include or exclude an item—and chooses the maximum. Although intuitive, this recursive version without memoization has exponential complexity. However, when memoization or table-based DP is added, performance improves significantly. This helps students understand the value of memoization.
+
+Efficiency of Branch and Bound
+The B&B solution is often faster in practical scenarios because many branches are cut early based on bounds. The value/weight ratio sorting helps maximize pruning efficiency. Although worst-case exponential, B&B performs extremely well for datasets where greedy bounding is effective.
+
+Applications
+The 0/1 Knapsack problem has real-world applications in resource allocation, budgeting, cargo loading, investment decisions, scheduling, and decision-making systems. Understanding DP and B&B solutions provides a foundation for solving many NP-hard problems in computer science and operations research.
+
+Conclusion
+This experiment demonstrates two powerful techniques—Dynamic Programming and Branch & Bound—for solving the 0/1 Knapsack problem. DP guarantees optimal results using a bottom-up approach, while Branch & Bound optimizes the search using pruning and bounding strategies. By implementing both, we gain valuable insight into optimization problems, computation limits, and algorithmic efficiency.

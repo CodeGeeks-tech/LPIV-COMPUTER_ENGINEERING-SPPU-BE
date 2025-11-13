@@ -1,0 +1,38 @@
+Introduction
+The Titanic Survival Prediction mini-project aims to build a machine learning model that can predict whether a passenger would survive the Titanic shipwreck based on their demographic and travel information. The dataset generally includes features such as passenger class, age, gender, number of siblings/spouses aboard, parents/children aboard, fare, and embarkation port. By training a model on historical passenger data, we can learn which factors significantly influenced survival chances and evaluate how well the model generalizes to unseen individuals.
+
+Dataset Description
+The Titanic dataset is a widely used benchmark dataset for classification tasks. It contains both numerical and categorical data, including gender, age, socio-economic class, and travel details. The target variable “Survived” indicates whether a passenger lived (1) or died (0). Some features contain missing values—most notably Age and Embarked—which must be handled before training a machine learning model. The dataset is useful for demonstrating preprocessing, feature engineering, and classification algorithms.
+
+Data Cleaning and Preprocessing
+Machine learning models require clean and consistent input data. In this project, missing Age values are replaced with the mean age, while missing Embarked values are filled using the most frequent value (mode). Categorical columns like Sex and Embarked are converted into numerical format using Label Encoding so that algorithms can process them. Preprocessing ensures the dataset is suitable for training, avoids errors, and improves the quality of predictions.
+
+Feature Selection
+Features selected for training include Pclass, Sex, Age, SibSp, Parch, Fare, and Embarked. These features were identified as the most influential in determining survival probability based on Titanic historical records. For example, women and children had a higher chance of survival, and passengers from higher socio-economic classes (Pclass = 1) generally received preferential access to lifeboats. Removing irrelevant fields like names and ticket numbers helps reduce noise.
+
+Train-Test Split
+To evaluate the performance of the model fairly, the dataset is divided into two parts: a training set (75%) used for learning patterns and a test set (25%) used for evaluating accuracy. The train_test_split function from scikit-learn is used with a fixed random state to ensure that results are reproducible. This separation prevents the model from memorizing the dataset and allows us to measure real-world predictive performance.
+
+Model Selection – Random Forest Classifier
+A Random Forest classifier is used due to its robustness and ability to handle mixed data types. Random Forest is an ensemble learning method that builds multiple decision trees and combines their outputs to produce a more accurate and stable prediction. It automatically handles feature importance, reduces overfitting through bootstrap aggregation, and performs well even with noisy data. With 100 trees (n_estimators=100), the classifier offers a good balance between accuracy and efficiency.
+
+Model Training
+During training, the Random Forest algorithm builds several decision trees, each using a randomly selected subset of data and features. Each tree learns different patterns, and the final prediction is determined by majority voting among the trees. The model learns relationships between passenger attributes and survival outcomes, discovering patterns such as the strong influence of gender, fare, and passenger class.
+
+Prediction
+After training, the model predicts the survival status of passengers in the test dataset. The predicted values (y_pred) are compared with the actual survival labels (y_test) to check how many predictions were correct. This helps measure the generalization capability of the model on previously unseen data. Predictions are binary: 1 for survival and 0 for non-survival.
+
+Evaluation Metrics
+Model performance is evaluated using accuracy, confusion matrix, and a classification report that includes precision, recall, and F1-score. Accuracy measures the percentage of correctly predicted samples. The confusion matrix provides insights into true positives, true negatives, false positives, and false negatives. Precision and recall provide deeper understanding, especially since the dataset is moderately imbalanced (more people died than survived). F1-score balances precision and recall to give an overall measure of model effectiveness.
+
+Importance of Feature Encoding
+Categorical variables like gender and embarkation port cannot be directly used by most machine learning algorithms. Label Encoding converts these text categories into numerical values without altering their meaning. Proper encoding ensures the model interprets categories correctly and avoids errors during training. This preprocessing step is essential for building accurate classification models.
+
+Handling Missing Data
+Missing values are common in real-world datasets like Titanic. Replacing missing Age values with the mean ensures the data remains usable without removing rows. Filling missing Embarked values with the mode ensures the most common boarding port is used as a reasonable estimate. Handling missing data carefully prevents bias and improves the consistency of the dataset.
+
+Random Forest Advantages
+Random Forest reduces overfitting by training multiple decision trees and averaging their outputs. It is resilient to noise, automatically handles non-linear relationships, and works well with both large and small datasets. It also calculates feature importance, which helps identify which attributes contributed most to survival, making the model more interpretable.
+
+Conclusion
+This mini project demonstrates how machine learning can be used to predict real-world outcomes using structured data. By applying preprocessing techniques, using a powerful ensemble model like Random Forest, and evaluating performance with meaningful metrics, we successfully predict Titanic survival outcomes with high accuracy. The project highlights essential ML workflow steps including data cleaning, encoding, model training, and evaluation, providing a strong foundation for more advanced machine learning applications.

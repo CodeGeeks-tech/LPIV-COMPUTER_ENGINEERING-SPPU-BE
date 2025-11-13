@@ -1,0 +1,44 @@
+Introduction
+Matrix multiplication is a core operation in scientific computing, machine learning, computer graphics, and engineering applications. This mini project focuses on implementing matrix multiplication using both a sequential (single-threaded) approach and a multithreaded approach. Two multithreading strategies are explored: one thread per row and one thread per cell. The goal is to compare their performance and understand how parallelism affects execution time.
+
+Basics of Matrix Multiplication
+Matrix multiplication combines two matrices A (of size m × n) and B (of size n × p) to produce a result matrix C (of size m × p). Each element in the resulting matrix is computed by taking the dot product of a row from A and a column from B. This requires triple nested loops in a sequential implementation, making the algorithm computationally expensive for large matrices.
+
+Sequential Matrix Multiplication
+The sequential approach uses a straightforward algorithm where three nested loops compute each element of the output matrix. This method is simple and easy to implement but slow for large matrices because it performs calculations one step at a time. Sequential execution serves as the baseline for comparing the performance of multithreaded methods.
+
+Input Methods
+The program supports two types of input: manual entry and automatically generated random matrices. Manual input allows users to test specific cases, while random matrix generation is useful for performance benchmarking. It also ensures flexibility in testing small and large matrix sizes.
+
+Multithreaded Matrix Multiplication – Thread per Row
+In this method, each row of the result matrix is assigned to a separate thread. The thread computes all columns of its respective row. This strategy reduces execution time significantly, especially for matrices with many rows. It uses fewer threads compared to a thread-per-cell approach, making it more memory-efficient and suitable for large matrices.
+
+Multithreaded Matrix Multiplication – Thread per Cell
+In this approach, each cell in the result matrix is computed by a separate thread. If the output matrix is m × p in size, then m × p threads are created. This method maximizes parallelism but can also overload the CPU if the matrix is too large, leading to thread creation overhead. It is ideal only for small matrices due to system limitations.
+
+Thread Management
+Python’s threading module is used to create and manage threads. Each thread performs computations independently and stores results in the shared output matrix. Proper synchronization ensures that all threads complete execution before final results are displayed. Thread creation, start, and join operations form the core of multithreaded execution.
+
+Performance Measurement
+The execution time of each method is recorded using the time module. Sequential execution is typically slower because operations are performed one after another. Thread-per-row is generally faster since modern CPUs can compute multiple rows in parallel. Thread-per-cell may offer the most parallelism but may become slower due to excessive thread overhead on larger matrices.
+
+Speedup Analysis
+Speedup is calculated by dividing the sequential execution time by the multithreaded execution time. A higher speedup value means better performance improvement due to parallelism. Thread-per-row commonly provides a balanced speedup without overwhelming the system, while thread-per-cell may only outperform sequential execution for very small matrices.
+
+Memory Usage Considerations
+Multithreading requires additional memory for thread stacks. Thread-per-row creates a manageable number of threads, but thread-per-cell can create hundreds or thousands of threads, consuming significant memory. This makes thread-per-cell impractical for large matrix sizes.
+
+The Global Interpreter Lock (GIL) Impact
+Python’s GIL prevents true parallel execution of threads for CPU-bound tasks. As a result, multithreaded implementations may not scale perfectly. However, because each thread performs simple arithmetic operations, performance improvements may still be observed due to reduced overhead in context switching and efficient scheduling.
+
+Correctness Verification
+After computation, the program displays the resulting matrix for small sizes. This is used to verify that both sequential and multithreaded results match. Ensuring correctness is essential before evaluating performance, especially when using multiple threads that may affect timing.
+
+Advantages of Multithreading
+Multithreading enables faster computation by utilizing multiple CPU cores. It improves efficiency, reduces processing time, and is especially useful for applications requiring large-scale matrix operations, such as deep learning, simulations, and graphics processing.
+
+Limitations of Multithreading
+Thread creation and switching consume CPU resources. Excessive threads may slow the system or even crash the program. Python’s GIL further limits the effectiveness of multithreading in CPU-bound operations. These constraints highlight the importance of choosing an optimal number of threads.
+
+Conclusion
+This mini project demonstrates the implementation of matrix multiplication using both sequential and multithreaded approaches. The thread-per-row model typically provides the best balance between performance and system stability, while thread-per-cell can be useful for small matrices but becomes inefficient for large ones. Overall, the project highlights how parallelism can enhance performance and provides practical insights into multithreaded programming concepts.

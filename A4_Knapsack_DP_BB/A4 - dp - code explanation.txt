@@ -1,0 +1,300 @@
+✅ FULL CODE EXPLANATION (EASY + FUNCTIONWISE)
+1️⃣ Function: solve_knapsack_tabulation()
+def solve_knapsack_tabulation():
+
+
+This function runs the whole knapsack program:
+
+Takes input
+
+Builds DP table
+
+Computes maximum value
+
+2️⃣ Taking number of items
+n = int(input("Enter number of items: "))
+
+
+User enters how many items are available.
+
+3️⃣ Reading item values
+val = []
+print("Enter values of items:")
+for i in range(n):
+    val.append(int(input(f"Value of item {i+1}: ")))
+
+
+val[i] stores profit of item i.
+
+4️⃣ Reading item weights
+wt = []
+print("Enter weights of items:")
+for i in range(n):
+    wt.append(int(input(f"Weight of item {i+1}: ")))
+
+
+wt[i] stores weight of item i.
+
+5️⃣ Capacity of Knapsack
+W = int(input("Enter maximum weight capacity: "))
+
+
+This is the maximum weight the knapsack can hold.
+
+6️⃣ DP Table Creation
+dp = [[0] * (W + 1) for _ in range(n + 1)]
+
+Meaning of dp[i][w]:
+
+Maximum value possible using first i items with capacity w.
+
+Table dimensions:
+
+Rows = items + 1
+
+Columns = weight capacity + 1
+
+All initialized to 0.
+
+7️⃣ Filling the DP Table (Main Logic)
+for i in range(1, n + 1):
+    for w in range(1, W + 1):
+
+
+We fill row by row.
+
+Case-1: Item cannot be included
+if wt[i - 1] > w:
+    dp[i][w] = dp[i - 1][w]
+
+
+If item weight > current capacity,
+➡ We cannot include the item.
+So take previous row value.
+
+Case-2: Item can be included OR excluded
+dp[i][w] = max(
+    val[i - 1] + dp[i - 1][w - wt[i - 1]],   # include the item
+    dp[i - 1][w]                             # exclude the item
+)
+
+
+We choose the better of:
+
+✔ Include item
+
+Profit =
+
+val[i-1] + dp[i-1][w - wt[i-1]]
+
+
+Means:
+
+Add item’s value
+
+Reduce capacity
+
+✔ Exclude item
+
+Profit =
+
+dp[i-1][w]
+
+
+We take the maximum → optimal choice.
+
+This is the essence of DP.
+
+8️⃣ Final Answer
+print("\nMaximum value using DP:", dp[n][W])
+
+
+This cell contains:
+best possible value using all n items with capacity W.
+
+🧠 CONCEPTUAL EXPLANATION (Write This in Exam)
+
+This program solves the 0/1 Knapsack Problem using Dynamic Programming – Tabulation.
+
+dp[i][w] represents the maximum value that can be achieved using first i items with a knapsack capacity w.
+
+The table is filled using two choices:
+
+Exclude the item
+
+Include the item (only if weight allows)
+
+The value stored is the maximum of these two choices.
+
+The final answer lies in dp[n][W].
+
+Time Complexity:
+O(nW)
+
+Space Complexity:
+O(nW)
+
+🎯 SAMPLE INPUT / OUTPUT (Exam Ready)
+
+Already included in your comment block:
+
+Maximum value using DP: 220
+
+
+
+
+
+
+✅ INPUT
+
+Items (value, weight):
+
+Item	Value	Weight
+1	60	10
+2	100	20
+3	120	30
+4	50	5
+
+Capacity = 50
+
+🧠 We will build a DP table:
+
+dp[i][w] = max value using first i items with capacity w
+
+I will show the table after each item is processed.
+
+🟦 STEP–1: Using Item 1 (60, weight 10)
+
+For w < 10 → cannot include item → all 0
+
+For w ≥ 10:
+
+dp[1][w] = 60
+
+w	0–9	10	11–50
+dp[1][w]	0	60	60
+🟦 STEP–2: Using Item 2 (100, weight 20)
+
+Now for each weight:
+
+If w < 20 → cannot include item → copy previous row
+If w ≥ 20 → choose max(include, exclude)
+
+Let's compute important columns:
+
+w = 20:
+
+include = 100
+
+exclude = 60
+→ 100
+
+w = 30:
+
+include = 100 + dp[1][10] = 100 + 60 = 160
+
+exclude = 60
+→ 160
+
+w = 50:
+
+include = 100 + dp[1][30] = 100 + 60 = 160
+
+exclude = 60
+→ 160
+
+Result after item 2:
+w	0–9	10	20	30	40–50
+dp[2][w]	0	60	100	160	160
+🟦 STEP–3: Using Item 3 (120, weight 30)
+
+Important capacities:
+
+w = 30:
+
+include = 120
+
+exclude = 160
+→ 160 (exclude is better)
+
+w = 40:
+
+include = 120 + dp[2][10] = 120 + 60 = 180
+
+exclude = 160
+→ 180
+
+w = 50:
+
+include = 120 + dp[2][20] = 120 + 100 = 220
+
+exclude = 160
+→ 220
+
+Row after item 3:
+w	0–9	10	20	30	40	50
+dp[3][w]	0	60	100	160	180	220
+🟦 STEP–4: Using Item 4 (50, weight 5)
+
+Now this item improves many columns because it is light.
+
+Let’s compute the important ones:
+
+✔ For w = 5:
+
+include = 50
+
+exclude = 0
+→ 50
+
+✔ For w = 15:
+
+include = 50 + dp[3][10] = 50 + 60 = 110
+
+exclude = 60
+→ 110
+
+✔ For w = 35:
+
+include = 50 + dp[3][30] = 50 + 160 = 210
+
+exclude = 160
+→ 210
+
+✔ For w = 45:
+
+include = 50 + dp[3][40] = 50 + 180 = 230
+
+exclude = 180
+→ 230
+
+✔ For w = 50:
+
+include = 50 + dp[3][45] = 50 + 180 = 230
+
+exclude = 220
+→ 230
+
+THIS IS YOUR FINAL ANSWER.
+
+🔥 FINAL DP ROW (After all items)
+Capacity (w)	Best Value
+0–4	0
+5	50
+10	60
+20	100
+30	160
+40	180
+45	230
+50	230
+🟩 FINAL ANSWER = 230
+This corresponds to picking items:
+
+Item 3 → 120 (30 weight)
+
+Item 1 → 60 (10 weight)
+
+Item 4 → 50 (5 weight)
+
+Total weight = 45
+Total value = 120 + 60 + 50 = 230

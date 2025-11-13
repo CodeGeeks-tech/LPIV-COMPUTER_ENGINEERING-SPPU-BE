@@ -1,0 +1,130 @@
+A(4) Write a program to solve a 0-1 Knapsack problem using dynamic programming or branch and bound strategy.
+
+THEORY
+The Branch and Bound method is an optimization strategy used to solve NP-hard problems like the 0–1 Knapsack. Instead of exploring all combinations, Branch & Bound systematically explores the solution space as a state-space tree. Each node represents a partial solution, and an upper bound is computed to estimate the best possible solution from that branch. If the bound is worse than the current best solution, the branch is pruned. This significantly reduces computation while still guaranteeing optimality. For the knapsack problem, nodes represent decisions to include or exclude items, and bounding is done using the fractional knapsack idea.
+
+ALGORITHM
+
+Branch and Bound Algorithm for 0–1 Knapsack
+
+Start
+
+Input number of items and their values & weights
+
+Compute value-to-weight ratio for each item and sort them in descending order
+
+Create a root node with:
+  • level = –1
+  • profit = 0
+  • weight = 0
+
+Insert the root node into a queue
+
+While queue is not empty:
+  • Remove a node (u)
+  • Create node v (child representing choosing next item)
+  • If including the item does not exceed capacity:
+    – update maxProfit if needed
+  • Compute bound(v); if bound > maxProfit → enqueue v
+  • Create node representing not choosing the item
+  • Compute bound; if bound > maxProfit → enqueue
+
+Continue until all nodes with promising bounds are explored
+
+Print the maximum profit found
+
+End
+
+Time Complexity: Exponential in worst case, but greatly reduced by pruning
+Space Complexity: O(n) to O(2ⁿ) depending on tree size
+
+
+
+                     +----------------+
+                     |     Start      |
+                     +--------+-------+
+                              |
+                              v
+            +-----------------+-------------------+
+            | Input items (value, weight), W      |
+            +-----------------+-------------------+
+                              |
+                              v
+         +--------------------+--------------------------+
+         | Sort items by value/weight ratio (desc)       |
+         +--------------------+--------------------------+
+                              |
+                              v
+        +---------------------+----------------------------+
+        | Create root node u (level=-1, profit=0, weight=0)|
+        +---------------------+----------------------------+
+                              |
+                              v
+                 +------------+-------------+
+                 | Insert root into queue Q |
+                 +------------+-------------+
+                              |
+                              v
+                 +------------+-------------+
+                 | While Q is not empty     |
+                 +------------+-------------+
+                              |
+                              v
+                     +--------+---------+
+                     | Remove node u    |
+                     +--------+---------+
+                              |
+                              v
+          +-------------------+-------------------+
+          | Create child v: include next item     |
+          +-------------------+-------------------+
+                              |
+                              v
+               +--------------+---------------+
+               | v.weight <= W ?              |
+               +--------+-------------+-------+
+                        |Yes          |No
+                        v             v
+           +------------+--+    +--------------------+
+           | Update maxProfit |  | Skip updating     |
+           +-------------------+  +-------------------+
+                        |
+                        v
+                   +----+-------------------------+
+                   | Compute bound(v)             |
+                   +----+-------------------------+
+                        |
+                        v
+                +-------+----------------------+
+                | bound(v) > maxProfit ?       |
+                +-------+-----------+----------+
+                        |Yes        |No
+                        v           v
+             +----------+----+     +-----------+
+             | Enqueue v     |     | Prune     |
+             +---------------+     +-----------+
+                        |
+                        v
+     +------------------+---------------------------+
+     | Create next child: exclude current item      |
+     +------------------+---------------------------+
+                        |
+                        v
+                (Repeat bounding & pruning)
+                        |
+                        v
+                (Loop back to while Q)
+                        |
+                        v
+              +---------+----------+
+              | Print maxProfit    |
+              +---------+----------+
+                        |
+                        v
+                      +---+
+                      |End|
+                      +---+
+
+
+CONCLUSION
+Branch and Bound provides an effective way to solve the 0–1 Knapsack problem by significantly reducing the number of states explored compared to brute-force or naive recursion. By calculating upper bounds using fractional knapsack logic, the algorithm avoids exploring branches that cannot produce better results. Although worst-case complexity remains exponential, in practice, branch-and-bound solves many instances efficiently and guarantees optimal solutions.

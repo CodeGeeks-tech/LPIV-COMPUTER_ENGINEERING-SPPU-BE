@@ -1,0 +1,98 @@
+✅ THEORY (One Paragraph – Exam Ready)
+
+The 0/1 Knapsack problem is a classic optimization problem where each item has a value and weight, and the objective is to maximize the total value without exceeding the given capacity. The Dynamic Programming (DP) approach solves it efficiently by building a table that stores solutions to smaller subproblems. In the tabulation (bottom-up) method, we create a 2D DP array where dp[i][w] represents the maximum value that can be obtained using the first i items with capacity w. For every item, we either include it (if weight allows) or exclude it, and we store the maximum of these two choices. This avoids repeated calculations and achieves optimal time complexity O(nW) compared to the exponential recursive solution.
+
+✅ ALGORITHM (Step-by-Step)
+
+Input the number of items n.
+
+Read the value[] and weight[] arrays for the items.
+
+Input the maximum capacity W of the knapsack.
+
+Create a DP table dp[n+1][W+1] and initialize all values to 0.
+
+For each item i from 1 to n:
+a. For each capacity w from 1 to W:
+
+If the item weight is greater than current capacity (weight[i-1] > w), copy previous value:
+dp[i][w] = dp[i-1][w]
+
+Otherwise compute both choices:
+
+Include item: value[i-1] + dp[i-1][w - weight[i-1]]
+
+Exclude item: dp[i-1][w]
+
+Store maximum of these two in dp[i][w].
+
+After filling the table, the answer is found at dp[n][W].
+
+Print the maximum value.
+
+                 ┌────────────────────────┐
+                 │     Start Program      │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │ Read n, value[], wt[]  │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │      Read Capacity W   │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │ Initialize dp table    │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │  For i = 1 to n        │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │ For w = 1 to W         │
+                 └───────────┬────────────┘
+                             │
+                             ▼
+       ┌───────────────────────────────────────────────────────┐
+       │ wt[i-1] > w ?                                         │
+       └───────────┬───────────────────────────────┬──────────┘
+                   │ Yes                            │ No
+                   ▼                                 ▼
+       ┌──────────────────────┐         ┌──────────────────────────────┐
+       │ dp[i][w] = dp[i-1][w]│         │ dp[i][w] = max( include ,    │
+       │                      │         │              exclude )        │
+       └───────────┬──────────┘         └──────────────┬──────────────┘
+                   │                                   │
+                   └───────────────┬───────────────────┘
+                                   ▼
+                       ┌────────────────────────┐
+                       │  End inner loop (w)    │
+                       └───────────┬────────────┘
+                                   │
+                                   ▼
+                       ┌────────────────────────┐
+                       │ End outer loop (i)     │
+                       └───────────┬────────────┘
+                                   │
+                                   ▼
+                      ┌───────────────────────────┐
+                      │ Print dp[n][W] (result)   │
+                      └───────────┬──────────────┘
+                                  │
+                                  ▼
+                      ┌───────────────────────────┐
+                      │          End              │
+                      └───────────────────────────┘
+
+You can redraw this nicely on paper.
+
+✅ CONCLUSION (Short & Perfect for Journal)
+
+The 0/1 Knapsack problem was successfully solved using the Dynamic Programming tabulation method. By building a DP table and evaluating all possible capacities for each item, we efficiently computed the optimal solution in O(nW) time. The DP approach eliminates redundant calculations found in the recursive method and provides an optimal and scalable solution. The final result, stored in dp[n][W], represents the maximum achievable value without exceeding the knapsack capacity.
