@@ -1,0 +1,138 @@
+410241: Design and Analysis of Algorithms
+
+Unit I Algorithms and Problem Solving
+Algorithm: The Role of Algorithms in Computing - What are algorithms, Algorithms as
+technology, Evolution of Algorithms, Design of Algorithm, Need of Correctness of Algorithm,
+Confirming correctness of Algorithm – sample examples, Iterative algorithm design issues.
+Problem solving Principles: Classification of problem, problem solving strategies, classification of
+timecomplexities (linear, logarithmic etc.)
+
+
+Unit II Analysis of Algorithms and Complexity Theory
+Analysis: Input size, best case, worst case, average case
+Counting Dominant operators, Growth rate, upper bounds, asymptotic growth, O, Ω, Ɵ, o and ω
+notations, polynomial and non-polynomial problems, deterministic and non-deterministic
+algorithms, P- class problems, NP-class of problems, Polynomial problem reduction NP complete
+problems- vertex cover and 3-SAT and NP hard problem - Hamiltonian cycle.
+
+Unit III Greedy And Dynamic Programming algorithmic Strate
+Greedy strategy: Principle, control abstraction, time analysis of control abstraction, knapsack
+problem,scheduling algorithms-Job scheduling and activity selection problem.
+Dynamic Programming: Principle, control abstraction, time analysis of control abstraction,
+binomialcoefficients, OBST, 0/1 knapsack, Chain Matrix multiplication
+
+Unit IV Backtracking and Branch-n-Bound
+Backtracking: Principle, control abstraction, time analysis of control abstraction, 8-queen
+problem,graph coloring problem, sum of subsets problem.
+Branch-n-Bound: Principle, control abstraction, time analysis of control abstraction, strategiesFIFO,
+LIFO and LC approaches, TSP, knapsack problem
+
+Unit V Amortized Analysis 
+Amortized Analysis: Aggregate Analysis, Accounting Method, Potential Function method,
+Amortized analysis-binary counter, stack Time-Space tradeoff, Introduction to Tractable and Nontractable Problems, Introduction to Randomized and Approximate algorithms, Embedded
+Algorithms: Embedded system scheduling (power optimized scheduling algorithm), sorting
+algorithm for embedded systems.
+
+Unit VI Multithreaded And Distributed Algorithms
+Multithreaded Algorithms - Introduction, Performance measures, Analyzing multithreaded
+algorithms,Parallel loops, Race conditions.
+Problem Solving using Multithreaded Algorithms - Multithreaded matrix multiplication,
+Multithreadedmerge sort.
+Distributed Algorithms - Introduction, Distributed breadth first search, Distributed Minimum
+SpanningTree.
+String Matching- Introduction, The Naive string matching algorithm, The Rabin-Karp algorithm
+
+
+
+
+410242: Machine Learning
+
+Unit I Introduction To Machine Learning
+Introduction to Machine Learning, Comparison of Machine learning with traditional
+programming, ML vs AI vs Data Science.
+Types of learning: Supervised, Unsupervised, and semi-supervised, reinforcement learning
+techniques,Models of Machine learning: Geometric model, Probabilistic Models, Logical Models,
+Grouping and grading models, Parametric and non-parametric models.
+Important Elements of Machine Learning- Data formats, Learnability, Statistical learning
+approaches
+
+Unit II Feature Engineering 
+Concept of Feature, Preprocessing of data: Normalization and Scaling, Standardization, Managing
+missing values, Introduction to Dimensionality Reduction, Principal Component Analysis (PCA),
+Feature Extraction: Kernel PCA, Local Binary Pattern.
+Introduction to various Feature Selection Techniques, Sequential Forward Selection, Sequential
+Backward Selection.
+Statistical feature engineering: count-based, Length, Mean, Median, Mode etc. based feature
+vectorcreation.
+Multidimensional Scaling, Matrix Factorization Techniques.
+
+
+Unit III Supervised Learning : Regression
+Bias, Variance, Generalization, Underfitting, Overfitting, Linear regression, Regression: Lasso
+regression, Ridge regression, Gradient descent algorithm.
+Evaluation Metrics: MAE, RMSE, R2
+
+Unit IV Supervised Learning : Classification
+Classification: K-nearest neighbour, Support vector machine.
+Ensemble Learning: Bagging, Boosting, Random Forest,
+Adaboost.
+Binary-vs-Multiclass Classification, Balanced and Imbalanced Multiclass Classification
+Problems,Variants of Multiclass Classification: One-vs-One and One-vs-All
+Evaluation Metrics and Score: Accuracy, Precision, Recall, Fscore, Cross-validation, MicroAverage Precision and Recall, Micro-Average F-score, Macro-Average Precision and Recall,
+Macro-Average F-score
+
+
+Unit V Unsupervised Learning 
+K-Means, K-medoids, Hierarchical, and Density-based Clustering, Spectral Clustering. Outlier
+analysis: introduction of isolation factor, local outlier factor.
+Evaluation metrics and score: elbow method, extrinsic and intrinsic methods
+
+
+Unit VI Introduction To Neural Networks 
+Artificial Neural Networks: Single Layer Neural Network, Multilayer Perceptron, Back
+Propagation Learning, Functional Link Artificial Neural Network, and Radial Basis Function
+Network, Activation functions,
+Introduction to Recurrent Neural Networks and Convolutional Neural Networks
+
+
+
+
+410243: Blockchain Technology
+
+Unit I Mathematical Foundation for Blockchain
+Cryptography: Symmetric Key Cryptography and Asymmetric Key Cryptography, Elliptic Curve
+Cryptography (ECC), Cryptographic Hash Functions: SHA256, Digital Signature Algorithm
+(DSA), Merkel Trees.
+
+
+Unit II Feature Engineering
+History, Centralized Vs. Decentralized Systems, Layers of Blockchain: Application Layer,
+Execution Layer, Semantic Layer, Propagation Layer, Consensus Layer, Why is Block chain
+important? Limitations of Centralized Systems, Blockchain Adoption So Far.
+
+
+Unit III Blockchain Platforms and Consensus in Blockchain
+Types of Blockchain Platforms: Public, Private and Consortium, Bitcoin, Ethereum,
+Hyperledger,IoTA, Corda, R3.
+Consensus in Blockchain: Consensus Approach, Consensus Elements, Consensus
+Algorithms, Proof of Work, Byzantine General problem, Proof of Stake, Proof of Elapsed
+Time, Proof of
+Activity, Proof of Burn.
+
+
+Unit IV Cryptocurrency – Bitcoin, and Token
+Introduction, Bitcoin and the Cryptocurrency, Cryptocurrency Basics
+Types of Cryptocurrency, Cryptocurrency Usage, Cryptowallets: Metamask, Coinbase, Binance
+
+
+Unit V Blockchain Ethereum Platform using Solidity 
+What is Ethereum, Types of Ethereum Networks, EVM (Ethereum Virtual Machine), Introduction
+to smart contracts, Purpose and types of Smart Contracts, Implementing and deploying smart
+contracts using Solidity, Swarm (Decentralized Storage Platform),
+Whisper (Decentralized Messaging Platform)
+
+Unit VI Blockchain Case Studies 
+Prominent Blockchain Applications, Retail, Banking and Financial Services, Government
+Sector, Healthcare, IOT, Energy and Utilities, Blockchain Integration with other Domains
+
+

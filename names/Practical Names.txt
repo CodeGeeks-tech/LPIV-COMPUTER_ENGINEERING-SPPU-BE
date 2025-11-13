@@ -1,0 +1,46 @@
+Practical Names
+
+DAA (Design & Analysis of Algorithms)
+
+Write a program – recursive program
+
+Write a program to implement Huffman coding using a greedy algorithm
+
+Program – solve Fractional Knapsack problem
+
+Write a program to solve 0/1 Knapsack problem
+
+Design N-Queen (with first queen placed)
+
+Mini-Project
+
+
+
+ML (Machine Learning)
+
+Predict the price of the Uber ride fare
+
+Classify the email using the binary classifier
+
+Give a bank customer dataset – build a neural network
+
+Implement K-means (clustering)
+
+Implement K-means algorithm on diabetes dataset
+
+Mini-Project
+
+
+Blockchain (BL)
+
+Installation of Metamask
+
+Smart Contract on a testnet
+
+Create your own wallet using Metamask
+
+Program in Solidity to create student DApp
+
+Write a survey
+
+Mini-Project
