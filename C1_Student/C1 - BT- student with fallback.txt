@@ -1,0 +1,41 @@
+//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
+
+contract StudentData {
+    struct Student { string name; uint rollno; }
+    Student[] public studentArr;
+    uint public nextRoll = 1;
+
+    event StudentAdded(string name, uint rollno);
+    event EtherReceived(address sender, uint amount, string via);
+
+    function addStudent(string memory name, uint rollno) public {
+        for (uint i = 0; i < studentArr.length; i++) {
+            require(studentArr[i].rollno != rollno, "Roll already exists");
+        }
+        studentArr.push(Student(name, rollno));
+        if (rollno >= nextRoll) { nextRoll = rollno + 1; }
+        emit StudentAdded(name, rollno);
+    }
+
+    function displayAllStudents() public view returns (Student[] memory) { return studentArr; }
+
+    function getStudentByIndex(uint index) public view returns (Student memory) {
+        require(index < studentArr.length, "Index out of bound");
+        return studentArr[index];
+    }
+
+    receive() external payable {
+        studentArr.push(Student("Default Student", nextRoll));
+        emit StudentAdded("Default Student", nextRoll);
+        nextRoll++;
+        emit EtherReceived(msg.sender, msg.value, "receive()");
+    }
+
+    fallback() external payable {
+        studentArr.push(Student("Fallback Student", nextRoll));
+        emit StudentAdded("Fallback Student", nextRoll);
+        nextRoll++;
+        emit EtherReceived(msg.sender, msg.value, "fallback()");
+    }
+}
